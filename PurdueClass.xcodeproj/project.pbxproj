@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */; };
+		049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD318C973C900A3F361 /* PUCCourse.m */; };
+		049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD618C9747300A3F361 /* PUCTerm.m */; };
+		049BAFDA18C974D100A3F361 /* PUCSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD918C974D100A3F361 /* PUCSchedule.m */; };
+		049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFDC18C9761F00A3F361 /* PUCSection.m */; };
+		049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFDF18C976F800A3F361 /* PUCMeeting.m */; };
+		04BBE5F218CAD1B5006B8E49 /* PUCClassFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE5F118CAD1B5006B8E49 /* PUCClassFactory.m */; };
+		04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */; };
+		04FFC07918C8EF7E00049790 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07818C8EF7E00049790 /* Foundation.framework */; };
+		04FFC07B18C8EF7E00049790 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07A18C8EF7E00049790 /* CoreGraphics.framework */; };
+		04FFC07D18C8EF7E00049790 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07C18C8EF7E00049790 /* UIKit.framework */; };
+		04FFC08318C8EF7E00049790 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04FFC08118C8EF7E00049790 /* InfoPlist.strings */; };
+		04FFC08518C8EF7E00049790 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC08418C8EF7E00049790 /* main.m */; };
+		04FFC08918C8EF7E00049790 /* PUCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC08818C8EF7E00049790 /* PUCAppDelegate.m */; };
+		04FFC08C18C8EF7E00049790 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FFC08A18C8EF7E00049790 /* Main.storyboard */; };
+		04FFC09118C8EF7E00049790 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04FFC09018C8EF7E00049790 /* Images.xcassets */; };
+		04FFC09818C8EF7E00049790 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC09718C8EF7E00049790 /* XCTest.framework */; };
+		04FFC09918C8EF7E00049790 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07818C8EF7E00049790 /* Foundation.framework */; };
+		04FFC09A18C8EF7E00049790 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07C18C8EF7E00049790 /* UIKit.framework */; };
+		04FFC0A218C8EF7E00049790 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04FFC0A018C8EF7E00049790 /* InfoPlist.strings */; };
+		04FFC0A418C8EF7E00049790 /* PurdueClassTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FFC0A318C8EF7E00049790 /* PurdueClassTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04FFC09B18C8EF7E00049790 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04FFC06D18C8EF7E00049790 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04FFC07418C8EF7E00049790;
+			remoteInfo = PurdueClass;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSubjectViewController.h; sourceTree = "<group>"; };
+		049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSubjectViewController.m; sourceTree = "<group>"; };
+		049BAFD218C973C900A3F361 /* PUCCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCCourse.h; sourceTree = "<group>"; };
+		049BAFD318C973C900A3F361 /* PUCCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCCourse.m; sourceTree = "<group>"; };
+		049BAFD518C9747300A3F361 /* PUCTerm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCTerm.h; sourceTree = "<group>"; };
+		049BAFD618C9747300A3F361 /* PUCTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCTerm.m; sourceTree = "<group>"; };
+		049BAFD818C974D100A3F361 /* PUCSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSchedule.h; sourceTree = "<group>"; };
+		049BAFD918C974D100A3F361 /* PUCSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSchedule.m; sourceTree = "<group>"; };
+		049BAFDB18C9761F00A3F361 /* PUCSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSection.h; sourceTree = "<group>"; };
+		049BAFDC18C9761F00A3F361 /* PUCSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSection.m; sourceTree = "<group>"; };
+		049BAFDE18C976F800A3F361 /* PUCMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCMeeting.h; sourceTree = "<group>"; };
+		049BAFDF18C976F800A3F361 /* PUCMeeting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCMeeting.m; sourceTree = "<group>"; };
+		04BBE5F018CAD1B5006B8E49 /* PUCClassFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCClassFactory.h; sourceTree = "<group>"; };
+		04BBE5F118CAD1B5006B8E49 /* PUCClassFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCClassFactory.m; sourceTree = "<group>"; };
+		04BBE5F318CAF258006B8E49 /* PUCCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCCourseViewController.h; sourceTree = "<group>"; };
+		04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCCourseViewController.m; sourceTree = "<group>"; };
+		04FFC07518C8EF7E00049790 /* PurdueClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurdueClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		04FFC07818C8EF7E00049790 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		04FFC07A18C8EF7E00049790 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		04FFC07C18C8EF7E00049790 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		04FFC08018C8EF7E00049790 /* PurdueClass-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PurdueClass-Info.plist"; sourceTree = "<group>"; };
+		04FFC08218C8EF7E00049790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04FFC08418C8EF7E00049790 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		04FFC08618C8EF7E00049790 /* PurdueClass-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PurdueClass-Prefix.pch"; sourceTree = "<group>"; };
+		04FFC08718C8EF7E00049790 /* PUCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PUCAppDelegate.h; sourceTree = "<group>"; };
+		04FFC08818C8EF7E00049790 /* PUCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PUCAppDelegate.m; sourceTree = "<group>"; };
+		04FFC08B18C8EF7E00049790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04FFC09018C8EF7E00049790 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		04FFC09618C8EF7E00049790 /* PurdueClassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurdueClassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04FFC09718C8EF7E00049790 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		04FFC09F18C8EF7E00049790 /* PurdueClassTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PurdueClassTests-Info.plist"; sourceTree = "<group>"; };
+		04FFC0A118C8EF7E00049790 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04FFC0A318C8EF7E00049790 /* PurdueClassTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PurdueClassTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04FFC07218C8EF7E00049790 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FFC07B18C8EF7E00049790 /* CoreGraphics.framework in Frameworks */,
+				04FFC07D18C8EF7E00049790 /* UIKit.framework in Frameworks */,
+				04FFC07918C8EF7E00049790 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04FFC09318C8EF7E00049790 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FFC09818C8EF7E00049790 /* XCTest.framework in Frameworks */,
+				04FFC09A18C8EF7E00049790 /* UIKit.framework in Frameworks */,
+				04FFC09918C8EF7E00049790 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		049BAFD118C972B300A3F361 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				049BAFD218C973C900A3F361 /* PUCCourse.h */,
+				049BAFD318C973C900A3F361 /* PUCCourse.m */,
+				049BAFD518C9747300A3F361 /* PUCTerm.h */,
+				049BAFD618C9747300A3F361 /* PUCTerm.m */,
+				049BAFD818C974D100A3F361 /* PUCSchedule.h */,
+				049BAFD918C974D100A3F361 /* PUCSchedule.m */,
+				049BAFDB18C9761F00A3F361 /* PUCSection.h */,
+				049BAFDC18C9761F00A3F361 /* PUCSection.m */,
+				049BAFDE18C976F800A3F361 /* PUCMeeting.h */,
+				049BAFDF18C976F800A3F361 /* PUCMeeting.m */,
+				04BBE5F018CAD1B5006B8E49 /* PUCClassFactory.h */,
+				04BBE5F118CAD1B5006B8E49 /* PUCClassFactory.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		04FFC06C18C8EF7E00049790 = {
+			isa = PBXGroup;
+			children = (
+				04FFC07E18C8EF7E00049790 /* PurdueClass */,
+				04FFC09D18C8EF7E00049790 /* PurdueClassTests */,
+				04FFC07718C8EF7E00049790 /* Frameworks */,
+				04FFC07618C8EF7E00049790 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04FFC07618C8EF7E00049790 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04FFC07518C8EF7E00049790 /* PurdueClass.app */,
+				04FFC09618C8EF7E00049790 /* PurdueClassTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04FFC07718C8EF7E00049790 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04FFC07818C8EF7E00049790 /* Foundation.framework */,
+				04FFC07A18C8EF7E00049790 /* CoreGraphics.framework */,
+				04FFC07C18C8EF7E00049790 /* UIKit.framework */,
+				04FFC09718C8EF7E00049790 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04FFC07E18C8EF7E00049790 /* PurdueClass */ = {
+			isa = PBXGroup;
+			children = (
+				049BAFD118C972B300A3F361 /* model */,
+				04FFC08718C8EF7E00049790 /* PUCAppDelegate.h */,
+				04FFC08818C8EF7E00049790 /* PUCAppDelegate.m */,
+				04FFC08A18C8EF7E00049790 /* Main.storyboard */,
+				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
+				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
+				04BBE5F318CAF258006B8E49 /* PUCCourseViewController.h */,
+				04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */,
+				04FFC09018C8EF7E00049790 /* Images.xcassets */,
+				04FFC07F18C8EF7E00049790 /* Supporting Files */,
+			);
+			path = PurdueClass;
+			sourceTree = "<group>";
+		};
+		04FFC07F18C8EF7E00049790 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04FFC08018C8EF7E00049790 /* PurdueClass-Info.plist */,
+				04FFC08118C8EF7E00049790 /* InfoPlist.strings */,
+				04FFC08418C8EF7E00049790 /* main.m */,
+				04FFC08618C8EF7E00049790 /* PurdueClass-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04FFC09D18C8EF7E00049790 /* PurdueClassTests */ = {
+			isa = PBXGroup;
+			children = (
+				04FFC0A318C8EF7E00049790 /* PurdueClassTests.m */,
+				04FFC09E18C8EF7E00049790 /* Supporting Files */,
+			);
+			path = PurdueClassTests;
+			sourceTree = "<group>";
+		};
+		04FFC09E18C8EF7E00049790 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04FFC09F18C8EF7E00049790 /* PurdueClassTests-Info.plist */,
+				04FFC0A018C8EF7E00049790 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04FFC07418C8EF7E00049790 /* PurdueClass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04FFC0A718C8EF7E00049790 /* Build configuration list for PBXNativeTarget "PurdueClass" */;
+			buildPhases = (
+				04FFC07118C8EF7E00049790 /* Sources */,
+				04FFC07218C8EF7E00049790 /* Frameworks */,
+				04FFC07318C8EF7E00049790 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PurdueClass;
+			productName = PurdueClass;
+			productReference = 04FFC07518C8EF7E00049790 /* PurdueClass.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04FFC09518C8EF7E00049790 /* PurdueClassTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04FFC0AA18C8EF7E00049790 /* Build configuration list for PBXNativeTarget "PurdueClassTests" */;
+			buildPhases = (
+				04FFC09218C8EF7E00049790 /* Sources */,
+				04FFC09318C8EF7E00049790 /* Frameworks */,
+				04FFC09418C8EF7E00049790 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04FFC09C18C8EF7E00049790 /* PBXTargetDependency */,
+			);
+			name = PurdueClassTests;
+			productName = PurdueClassTests;
+			productReference = 04FFC09618C8EF7E00049790 /* PurdueClassTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04FFC06D18C8EF7E00049790 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = PUC;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Rendong Chen";
+				TargetAttributes = {
+					04FFC09518C8EF7E00049790 = {
+						TestTargetID = 04FFC07418C8EF7E00049790;
+					};
+				};
+			};
+			buildConfigurationList = 04FFC07018C8EF7E00049790 /* Build configuration list for PBXProject "PurdueClass" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04FFC06C18C8EF7E00049790;
+			productRefGroup = 04FFC07618C8EF7E00049790 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04FFC07418C8EF7E00049790 /* PurdueClass */,
+				04FFC09518C8EF7E00049790 /* PurdueClassTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04FFC07318C8EF7E00049790 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FFC09118C8EF7E00049790 /* Images.xcassets in Resources */,
+				04FFC08318C8EF7E00049790 /* InfoPlist.strings in Resources */,
+				04FFC08C18C8EF7E00049790 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04FFC09418C8EF7E00049790 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FFC0A218C8EF7E00049790 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04FFC07118C8EF7E00049790 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04BBE5F218CAD1B5006B8E49 /* PUCClassFactory.m in Sources */,
+				049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */,
+				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
+				049BAFDA18C974D100A3F361 /* PUCSchedule.m in Sources */,
+				04FFC08518C8EF7E00049790 /* main.m in Sources */,
+				049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */,
+				049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */,
+				049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */,
+				04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */,
+				04FFC08918C8EF7E00049790 /* PUCAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04FFC09218C8EF7E00049790 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FFC0A418C8EF7E00049790 /* PurdueClassTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04FFC09C18C8EF7E00049790 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04FFC07418C8EF7E00049790 /* PurdueClass */;
+			targetProxy = 04FFC09B18C8EF7E00049790 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		04FFC08118C8EF7E00049790 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FFC08218C8EF7E00049790 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		04FFC08A18C8EF7E00049790 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FFC08B18C8EF7E00049790 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04FFC0A018C8EF7E00049790 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04FFC0A118C8EF7E00049790 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04FFC0A518C8EF7E00049790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		04FFC0A618C8EF7E00049790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04FFC0A818C8EF7E00049790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
+				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		04FFC0A918C8EF7E00049790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
+				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		04FFC0AB18C8EF7E00049790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PurdueClass.app/PurdueClass";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PurdueClassTests/PurdueClassTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		04FFC0AC18C8EF7E00049790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PurdueClass.app/PurdueClass";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
+				INFOPLIST_FILE = "PurdueClassTests/PurdueClassTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04FFC07018C8EF7E00049790 /* Build configuration list for PBXProject "PurdueClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FFC0A518C8EF7E00049790 /* Debug */,
+				04FFC0A618C8EF7E00049790 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04FFC0A718C8EF7E00049790 /* Build configuration list for PBXNativeTarget "PurdueClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FFC0A818C8EF7E00049790 /* Debug */,
+				04FFC0A918C8EF7E00049790 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04FFC0AA18C8EF7E00049790 /* Build configuration list for PBXNativeTarget "PurdueClassTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FFC0AB18C8EF7E00049790 /* Debug */,
+				04FFC0AC18C8EF7E00049790 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04FFC06D18C8EF7E00049790 /* Project object */;
+}
