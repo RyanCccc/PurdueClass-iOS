@@ -10,4 +10,7 @@
 
 @interface PUCCourseViewController : UITableViewController
 
+@property (strong, nonatomic) NSString * subject;
+@property (nonatomic)BOOL needToRefresh;
+
 @end

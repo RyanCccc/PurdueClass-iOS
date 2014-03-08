@@ -7,12 +7,37 @@
 //
 
 #import "PUCCourseViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface PUCCourseViewController ()
+
+@property (strong, nonatomic)NSArray *CNBRs;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation PUCCourseViewController
+
+
+- (void)connect
+{
+    NSString *urlStr = [NSString stringWithFormat:@"http://purdue-class.chenrendong.com/course/subject/%@/", self.subject];
+    //NSURL *url = [[NSURL alloc]initWithString:urlStr];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.CNBRs = (NSArray *)responseObject;
+        [self.tableView reloadData];
+        [(UIActivityIndicatorView*)[self.view viewWithTag:12] stopAnimating];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+- (void)refresh
+{
+    [self connect];
+    self.needToRefresh = false;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,12 +51,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.center = CGPointMake(160, 200);
+    spinner.tag = 12;
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = self.subject;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.needToRefresh) {
+        [self refresh];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,23 +89,27 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.CNBRs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
     
+    cell.textLabel.text = (NSString *)[self.CNBRs objectAtIndex:indexPath.row];
     return cell;
 }
 

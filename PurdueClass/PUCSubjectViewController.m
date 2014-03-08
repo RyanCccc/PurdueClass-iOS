@@ -7,6 +7,7 @@
 //
 
 #import "PUCSubjectViewController.h"
+#import "PUCCourseViewController.h"
 #import "PUCCourse.h"
 
 @interface PUCSubjectViewController ()
@@ -14,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *courseTable;
 @property (strong, nonatomic) NSArray* subjects;
 @property (strong, nonatomic) NSArray* titles;
+@property (strong, nonatomic) NSString* selectedSubject;
 @end
 
 @implementation PUCSubjectViewController
@@ -162,15 +164,24 @@
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   // if ([[segue identifier] isEqualToString:@"test"]) {
-   // }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+   if ([[segue identifier] isEqualToString:@"subjectToCourse"]) {
+       PUCCourseViewController *destinationVc = [segue destinationViewController];
+       if (self.selectedSubject != destinationVc.subject) {
+           destinationVc.needToRefresh = true;
+       }
+       destinationVc.subject = self.selectedSubject;
+       
+   }
+    
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   // [self performSegueWithIdentifier:@"test" sender:self];
+    NSArray * subject = [[self.subjects objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    self.selectedSubject = (NSString *)[subject objectAtIndex:0];
+    [self performSegueWithIdentifier:@"subjectToCourse" sender:self];
 }
 
 @end
