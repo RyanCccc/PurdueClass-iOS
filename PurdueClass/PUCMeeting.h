@@ -15,8 +15,11 @@
 @property (strong, nonatomic) NSString* instructor;
 @property (strong, nonatomic) NSString* building;
 @property (strong, nonatomic) NSString* room;
-@property (nonatomic) NSInteger* start_t;
-@property (nonatomic) NSInteger* end_t;
+@property (nonatomic) NSInteger start_t;
+@property (nonatomic) NSInteger end_t;
 @property (strong, nonatomic) PUCSection* section;
+
+- (instancetype)initWithJSON:(id) JSON;
++ (NSArray *)initWithMultiMeetings:(id) JSON;
 
 @end

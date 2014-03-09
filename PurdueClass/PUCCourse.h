@@ -21,7 +21,9 @@
 @property (strong, nonatomic) PUCTerm *term;
 @property (strong, nonatomic) NSArray* schedules;
 
-- (instancetype)initWithSubject:(NSString*)subject CNBR:(NSString*)CNBR;
+
+- (instancetype)initWithJSON:(id) JSON;
+
 + (NSArray *)getSubjects;
 
 @end

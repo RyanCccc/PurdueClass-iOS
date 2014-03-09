@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SWTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03336FA8C67348DF9F3877A1</key>
+		<key>40B742B09070432CAF19DBFE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71AA39CFB863417CA3BCD877</key>
+		<key>90344911E3554D61A4F3FE3C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BA846AEA86944F0E9CD895E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,12 +7,14 @@
 //
 
 #import "PUCCourseViewController.h"
+#import "PUCSectionViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 
 @interface PUCCourseViewController ()
 
-@property (strong, nonatomic)NSArray *CNBRs;
+@property (strong, nonatomic) NSArray * CNBRs;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSString * selectedCNBR;
 
 @end
 
@@ -28,15 +30,22 @@
         self.CNBRs = (NSArray *)responseObject;
         [self.tableView reloadData];
         [(UIActivityIndicatorView*)[self.view viewWithTag:12] stopAnimating];
+        if ([self.CNBRs count]==0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No course"
+                                                            message:[NSString stringWithFormat:@"Subject %@ doesn't have course", self.subject]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:error.localizedFailureReason
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }];
-}
-
-- (void)refresh
-{
-    [self connect];
-    self.needToRefresh = false;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -51,11 +60,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    spinner.center = CGPointMake(160, 200);
-    spinner.tag = 12;
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
+    if (self.needToRefresh) {
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        spinner.center = CGPointMake(160, 200);
+        spinner.tag = 12;
+        [self.view addSubview:spinner];
+        [spinner startAnimating];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -73,7 +84,8 @@
 {
     [super viewDidAppear:animated];
     if (self.needToRefresh) {
-        [self refresh];
+        [self connect];
+        self.needToRefresh = false;
     }
 }
 
@@ -87,14 +99,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+//#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.CNBRs count];
 }
@@ -152,7 +164,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
@@ -160,8 +171,18 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"courseToSection"]) {
+        PUCSectionViewController *destinationVc = [segue destinationViewController];
+        destinationVc.subject = self.subject;
+        destinationVc.CNBR = self.selectedCNBR;
+    }
+    
 }
 
- */
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedCNBR = (NSString *)[self.CNBRs objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"courseToSection" sender:self];
+}
 
 @end

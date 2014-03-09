@@ -16,4 +16,7 @@
 @property (strong, nonatomic) NSArray* sections;
 @property (strong, nonatomic) PUCCourse* course;
 
+- (instancetype)initWithJSON:(id) JSON;
++ (NSArray *)initWithMultiSchedules:(id) JSON;
+
 @end

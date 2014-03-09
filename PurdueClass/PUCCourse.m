@@ -7,23 +7,33 @@
 //
 
 #import "PUCCourse.h"
+#import "PUCSchedule.h"
+#import "PUCClassManager.h"
 
 static NSArray * subjects = nil;
 
 @implementation PUCCourse
 
-- (instancetype)initWithSubject:(NSString*)subject CNBR:(NSString*)CNBR
+- (instancetype)initWithJSON:(id) JSON
 {
     self = [super init];
     
     if(self){
-        self.subject = subject;
-        self.CNBR = CNBR;
-        self.subject_name = subject;
-        self.credit = @"Unknown";
+        NSDictionary * course = (NSDictionary *)JSON;
+        self.subject = [course objectForKey:@"subject"];
+        self.subject_name = [course objectForKey:@"subject_name"];
+        self.CNBR = [course objectForKey:@"CNBR"];
+        self.title = [course objectForKey:@"title"];
+        self.description = [course objectForKey:@"description"];
+        self.credit = [course objectForKey:@"credit"];
+        self.code = [course objectForKey:@"code"];
+        self.schedules = [PUCSchedule initWithMultiSchedules:[course objectForKey:@"schedules"]];
+        PUCClassManager * mng = [PUCClassManager getManager];
+        mng.course = self;
     }
     return self;
 }
+
 
 + (NSArray *)getSubjects
 {
