@@ -8,6 +8,7 @@
 
 #import "PUCTestTableViewController.h"
 #import "PUCSectionCell.h"
+#import "PUCDescriptionCell.h"
 
 @interface PUCTestTableViewController ()
 
@@ -60,10 +61,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    PUCSectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PUCDescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
     if (cell == nil) {
-        
+        cell =[[PUCDescriptionCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        [cell addText:@"aaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohxaaaaasidfohdsofihdsiofhoahifioahsfoahsfoiahsfiohafoihdsiofhsdoihiosdfghoifdshgiohsxviohx"];
+        /*
         NSMutableArray *leftUtilityButtons = [NSMutableArray new];
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
         
@@ -97,8 +100,15 @@
     cell.rightLabel.text = @"CRN: 10001";
     cell.downLeftLabel.text = @"Section No: LE1";
     cell.downRightLabel.text = @"No required sections";
-    
+    */
+        
+    }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 0.f;
 }
 
 /*

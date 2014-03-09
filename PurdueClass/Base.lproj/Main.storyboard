@@ -194,7 +194,13 @@
                             <outlet property="delegate" destination="GFt-uR-xtG" id="ubw-JW-4sp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Mll-H6-bOH"/>
+                    <navigationItem key="navigationItem" id="Mll-H6-bOH">
+                        <barButtonItem key="rightBarButtonItem" title="Options" id="OC6-ne-FaO">
+                            <connections>
+                                <action selector="popUpActions:" destination="GFt-uR-xtG" id="br4-vU-mFO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQk-H0-y21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -28,6 +28,10 @@ static NSArray * subjects = nil;
         self.credit = [course objectForKey:@"credit"];
         self.code = [course objectForKey:@"code"];
         self.schedules = [PUCSchedule initWithMultiSchedules:[course objectForKey:@"schedules"]];
+        for (PUCSchedule * schedule in self.schedules)
+        {
+            schedule.course = self;
+        }
         PUCClassManager * mng = [PUCClassManager getManager];
         mng.course = self;
     }

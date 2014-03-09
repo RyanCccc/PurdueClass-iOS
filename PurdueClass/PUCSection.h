@@ -14,7 +14,7 @@
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* number;
 @property (strong, nonatomic) NSString* crn;
-@property (strong, nonatomic) NSArray *linked_sections;
+@property (strong, nonatomic) NSArray* linked_sections;
 @property (strong, nonatomic) NSArray* meetings;
 @property (nonatomic) NSInteger start_t;
 @property (nonatomic) NSInteger end_t;

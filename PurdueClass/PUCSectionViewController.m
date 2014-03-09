@@ -10,11 +10,13 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "PUCClassManager.h"
 #import "PUCSectionCell.h"
+#import "PUCDetailViewController.h"
 
 @interface PUCSectionViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic)NSArray * filteredSections;
+@property (strong, nonatomic)PUCSection * selectedSection;
 
 @end
 
@@ -96,39 +98,22 @@
     return self;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [[PUCClassManager getManager]clearCourse];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self connect];
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.segmentedControl removeAllSegments];
-    [self.segmentedControl insertSegmentWithTitle:@"All" atIndex:0 animated:NO];
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[PUCClassManager getManager]clearCourse];
+    [self.segmentedControl removeAllSegments];
+    [self.segmentedControl insertSegmentWithTitle:@"All" atIndex:0 animated:NO];
     
-    self.title = [NSString stringWithFormat:@"%@ %@", self.subject, self.CNBR];
+    self.title = [NSString stringWithFormat:@"%@%@", self.subject, self.CNBR];
     
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     spinner.center = CGPointMake(160, 200);
     spinner.tag = 12;
     [self.view addSubview:spinner];
     [spinner startAnimating];
+    
+    [self connect];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -240,5 +225,25 @@
     }
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"start_t" ascending:YES];
+    NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
+    self.selectedSection = section;
+    [self performSegueWithIdentifier:@"sectionToDetail" sender:self];
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"sectionToDetail"]) {
+        PUCDetailViewController *destinationVc = [segue destinationViewController];
+        destinationVc.section = self.selectedSection;
+    }
+}
+
 
 @end

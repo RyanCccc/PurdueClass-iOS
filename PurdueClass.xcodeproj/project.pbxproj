@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443CAA218CBA41A004C524F /* PUCSectionViewController.m */; };
 		046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */; };
+		046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */; };
 		049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */; };
 		049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD318C973C900A3F361 /* PUCCourse.m */; };
 		049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD618C9747300A3F361 /* PUCTerm.m */; };
@@ -50,6 +51,8 @@
 		0443CAA218CBA41A004C524F /* PUCSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSectionViewController.m; sourceTree = "<group>"; };
 		046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCDetailViewController.h; sourceTree = "<group>"; };
 		046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCDetailViewController.m; sourceTree = "<group>"; };
+		046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCDescriptionCell.h; sourceTree = "<group>"; };
+		046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCDescriptionCell.m; sourceTree = "<group>"; };
 		049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSubjectViewController.h; sourceTree = "<group>"; };
 		049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSubjectViewController.m; sourceTree = "<group>"; };
 		049BAFD218C973C900A3F361 /* PUCCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCCourse.h; sourceTree = "<group>"; };
@@ -186,6 +189,8 @@
 				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
 				04D7F35918CBFF4500875CD7 /* PUCTestTableViewController.h */,
 				04D7F35A18CBFF4500875CD7 /* PUCTestTableViewController.m */,
+				046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */,
+				046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */,
 				04FFC09018C8EF7E00049790 /* Images.xcassets */,
 				04FFC07F18C8EF7E00049790 /* Supporting Files */,
 			);
@@ -358,6 +363,7 @@
 				049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */,
 				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
+				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
 				049BAFDA18C974D100A3F361 /* PUCSchedule.m in Sources */,
 				04FFC08518C8EF7E00049790 /* main.m in Sources */,
 				046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */,

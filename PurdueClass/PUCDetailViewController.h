@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PUCClassManager.h"
 
-@interface PUCDetailViewController : UITableViewController
+@interface PUCDetailViewController : UITableViewController<UIActionSheetDelegate>
+
+@property (strong, nonatomic)PUCSection * section;
 
 @end
