@@ -112,7 +112,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MlE-ML-Bz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-724" y="-2138"/>
+            <point key="canvasLocation" x="-1316" y="-3838"/>
         </scene>
         <!--Section View Controller-->
         <scene sceneID="whe-KM-GQ8">
@@ -201,10 +201,60 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="CQe-wv-sqR" kind="push" identifier="sectionToLink" id="Cqo-gS-ODh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQk-H0-y21" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-460" y="-3099"/>
+        </scene>
+        <!--Linked Section View Controller-->
+        <scene sceneID="RJi-gb-5LW">
+            <objects>
+                <tableViewController id="CQe-wv-sqR" customClass="PUCLinkedSectionViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bww-ts-JXY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="kzf-zz-ou6">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oME-6k-7BN">
+                                    <rect key="frame" x="20" y="8" width="280" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="First"/>
+                                        <segment title="Second"/>
+                                    </segments>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="JKz-Kk-lf2">
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JKz-Kk-lf2" id="9Ao-aQ-OYN">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CQe-wv-sqR" id="Xgg-Vv-h5Q"/>
+                            <outlet property="delegate" destination="CQe-wv-sqR" id="T5f-Y2-zWM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="pLg-sU-3jd"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="oME-6k-7BN" id="BLe-XD-zh9"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dy9-p7-K62" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-460" y="-2383"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jZU-jU-ozh">
@@ -237,7 +287,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGD-eR-p9N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1250" y="-2138"/>
+            <point key="canvasLocation" x="-1842" y="-3838"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -8,6 +8,7 @@
 
 #import "PUCDetailViewController.h"
 #import "PUCDescriptionCell.h"
+#import "PUCLinkedSectionViewController.h"
 
 @interface NSString (JRStringAdditions)
 
@@ -46,7 +47,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -61,7 +61,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.section.schedule.course.code;
+    self.title = self.section.crn;
     self.popup = [[UIActionSheet alloc] initWithTitle:@"Select options"
                                              delegate:self
                                     cancelButtonTitle:@"Cancel"
@@ -279,16 +279,29 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Get the new view controller using
+    if ([[segue identifier] isEqualToString:@"subjectToCourse"]){
+        PUCLinkedSectionViewController * destinationVC = [segue destinationViewController];
+        // Pass the selected object to the new view controller.
+        destinationVC.sections = self.section.linked_sections;
+    }
 }
 
- */
+
+
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row == 3)
+    {
+        [self performSegueWithIdentifier:@"sectionToLink" sender:self];
+    }
+    
+}
 
 @end

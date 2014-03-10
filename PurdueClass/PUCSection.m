@@ -54,10 +54,12 @@
     NSArray* multi_sections_JSON = (NSArray*)JSON;
     for (NSArray* sections_JSON in multi_sections_JSON)
     {
+        NSMutableArray * section_set = [[NSMutableArray alloc]init];
         for (id section in sections_JSON)
         {
-            [sections addObject:[[PUCSection alloc]initWithJSON:section forLinkedSection:true]];
+            [section_set addObject:[[PUCSection alloc]initWithJSON:section forLinkedSection:true]];
         }
+        [sections addObject:[section_set copy]];
     }
     return sections;
 }
