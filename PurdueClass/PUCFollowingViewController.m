@@ -1,31 +1,20 @@
 //
-//  PUCLinkedSectionViewController.m
+//  PUCFollowingViewController.m
 //  PurdueClass
 //
 //  Created by Rendong Chen on 14-3-10.
 //  Copyright (c) 2014年 Rendong Chen. All rights reserved.
 //
 
-#import "PUCLinkedSectionViewController.h"
+#import "PUCFollowingViewController.h"
+#import "PUCClassManager.h"
 #import "PUCSectionCell.h"
-#import "PUCSection.h"
 
-@interface PUCLinkedSectionViewController ()
-
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic)NSArray* filteredSections;
+@interface PUCFollowingViewController ()
 
 @end
 
-@implementation PUCLinkedSectionViewController
-
-
-- (void)changeSeg: (id)sender
-{
-    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    self.filteredSections = [self.sections objectAtIndex:[segmentedControl selectedSegmentIndex]];
-    [self.tableView reloadData];
-}
+@implementation PUCFollowingViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,20 +28,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.segmentedControl removeAllSegments];
-    for (int i=0; i<[self.sections count]; i++) {
-        [self.segmentedControl insertSegmentWithTitle:[NSString stringWithFormat:@"Required part %d", i+1]
-                                              atIndex:i
-                                             animated:NO];
-    }
-    self.segmentedControl.selectedSegmentIndex = 0;
-    self.filteredSections = self.sections[0];
-    [self.segmentedControl addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSArray * list = [NSArray arrayWithContentsOfFile:[PUCClassManager getManager].plistPath];
+    if (list!=nil) {
+        self.followList = list;
+    }else
+    {
+        self.followList = nil;
+    }
+    [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,7 +70,7 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.filteredSections count];
+    return [self.followList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,16 +112,17 @@
     //sections_for_cell = [PUCClassManager getManager].sections;
     //}
     
-    if (self.filteredSections != nil)
+    if (self.followList != nil)
     {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"start_t" ascending:YES];
-        NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+        NSDictionary* section =  self.followList[indexPath.row];
+        cell.rightLabel.text = [section objectForKey:@"crn"];
         
-        PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
-        cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
-        cell.leftLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", section.start_t/60, section.start_t%60, section.start_t%60==0?@"0":@"", section.end_t/60, section.end_t%60, section.end_t%60==0?@"0":@""];
-        cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", section.number];
+        NSInteger start_t = [[section objectForKey:@"start_t"]integerValue];
+        NSInteger end_t = [[section objectForKey:@"end_t"]integerValue];
+        cell.leftLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", start_t/60, start_t%60, start_t%60==0?@"0":@"", end_t/60, end_t%60, end_t%60==0?@"0":@""];
+        cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", [section objectForKey:@"number"]];
         //cell.downRightLabel.text = [section.linked_sections count]==0?@"No required sections":[NSString stringWithFormat:@"* %d required section", [section.linked_sections count]];
+        
     }
     return cell;
 }

@@ -18,9 +18,11 @@
 @property (strong, nonatomic)NSMutableArray *sections;
 @property (strong, nonatomic)NSMutableArray *meetings;
 @property (strong, nonatomic)PUCCourse* course;
+@property (strong, nonatomic)NSString *plistPath;
 
 + (PUCClassManager *)getManager;
 - (void) getCourse:(id) JSON;
 - (void) clearCourse;
+- (void)writeData:(id)data;
 
 @end

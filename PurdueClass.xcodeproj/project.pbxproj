@@ -10,6 +10,8 @@
 		0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443CAA218CBA41A004C524F /* PUCSectionViewController.m */; };
 		046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */; };
 		046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */; };
+		04848EAE18CD7FDC004081D4 /* PUCLinkedSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04848EAD18CD7FDC004081D4 /* PUCLinkedSectionViewController.m */; };
+		04848EB118CD8CA1004081D4 /* PUCFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */; };
 		049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */; };
 		049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD318C973C900A3F361 /* PUCCourse.m */; };
 		049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD618C9747300A3F361 /* PUCTerm.m */; };
@@ -53,6 +55,10 @@
 		046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCDetailViewController.m; sourceTree = "<group>"; };
 		046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCDescriptionCell.h; sourceTree = "<group>"; };
 		046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCDescriptionCell.m; sourceTree = "<group>"; };
+		04848EAC18CD7FDC004081D4 /* PUCLinkedSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCLinkedSectionViewController.h; sourceTree = "<group>"; };
+		04848EAD18CD7FDC004081D4 /* PUCLinkedSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCLinkedSectionViewController.m; sourceTree = "<group>"; };
+		04848EAF18CD8CA1004081D4 /* PUCFollowingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCFollowingViewController.h; sourceTree = "<group>"; };
+		04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCFollowingViewController.m; sourceTree = "<group>"; };
 		049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSubjectViewController.h; sourceTree = "<group>"; };
 		049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSubjectViewController.m; sourceTree = "<group>"; };
 		049BAFD218C973C900A3F361 /* PUCCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCCourse.h; sourceTree = "<group>"; };
@@ -177,6 +183,10 @@
 				04FFC08718C8EF7E00049790 /* PUCAppDelegate.h */,
 				04FFC08818C8EF7E00049790 /* PUCAppDelegate.m */,
 				04FFC08A18C8EF7E00049790 /* Main.storyboard */,
+				04848EAF18CD8CA1004081D4 /* PUCFollowingViewController.h */,
+				04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */,
+				04848EAC18CD7FDC004081D4 /* PUCLinkedSectionViewController.h */,
+				04848EAD18CD7FDC004081D4 /* PUCLinkedSectionViewController.m */,
 				046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */,
 				046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */,
 				0443CAA118CBA41A004C524F /* PUCSectionViewController.h */,
@@ -361,6 +371,7 @@
 			files = (
 				04BBE5F218CAD1B5006B8E49 /* PUCClassManager.m in Sources */,
 				049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */,
+				04848EB118CD8CA1004081D4 /* PUCFollowingViewController.m in Sources */,
 				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
 				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
@@ -371,6 +382,7 @@
 				049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */,
 				0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */,
 				04D7F35818CBFCF600875CD7 /* PUCSectionCell.m in Sources */,
+				04848EAE18CD7FDC004081D4 /* PUCLinkedSectionViewController.m in Sources */,
 				049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */,
 				04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */,
 				04FFC08918C8EF7E00049790 /* PUCAppDelegate.m in Sources */,

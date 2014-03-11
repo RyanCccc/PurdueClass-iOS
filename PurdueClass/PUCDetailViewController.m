@@ -41,12 +41,16 @@
 @implementation PUCDetailViewController
 
 - (IBAction)popUpActions:(id)sender {
-    [self.popup showInView:self.view];
+    [self.popup showInView:[self.view window]]  ;
     NSLog(@"ME");
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSLog(@"Click index: %d",buttonIndex);
+    if (buttonIndex == 0) {
+        [[PUCClassManager getManager]writeData:self.section];
+    }
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -198,7 +202,7 @@
                     cell.textLabel.text = @"Time:";
                     NSInteger start_t = ((PUCMeeting*)self.section.meetings[0]).start_t;
                     NSInteger end_t = ((PUCMeeting*)self.section.meetings[0]).end_t;
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d:%d ~ %d:%d", start_t/60, start_t%60, end_t/60, end_t%60];
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", start_t/60, start_t%60, start_t%60==0?@"0":@"", end_t/60, end_t%60, end_t%60==0?@"0":@""];
                     break;
             }
             break;
@@ -286,7 +290,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using
-    if ([[segue identifier] isEqualToString:@"subjectToCourse"]){
+    if ([[segue identifier] isEqualToString:@"sectionToLink"]){
         PUCLinkedSectionViewController * destinationVC = [segue destinationViewController];
         // Pass the selected object to the new view controller.
         destinationVC.sections = self.section.linked_sections;
