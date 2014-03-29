@@ -11,7 +11,7 @@
 
 @interface PUCSectionViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate>
 
-@property (strong, nonatomic)NSString * subject;
-@property (strong, nonatomic)NSString * CNBR;
+//Get from course view
+@property (strong, nonatomic)PUCCourse * course;
 
 @end

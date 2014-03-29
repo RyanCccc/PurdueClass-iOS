@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PUCClassManager.h"
 
 @interface PUCCourseViewController : UITableViewController
 
-@property (strong, nonatomic) NSString * subject;
-@property (nonatomic)BOOL needToRefresh;
+// Get from Subject View
+@property (strong, nonatomic) PUCSubject * subject;
 
 @end

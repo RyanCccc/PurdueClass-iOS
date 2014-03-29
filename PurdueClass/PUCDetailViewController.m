@@ -47,9 +47,9 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Click index: %d",buttonIndex);
+    NSLog(@"Click index: %ld",(long)buttonIndex);
     if (buttonIndex == 0) {
-        [[PUCClassManager getManager]writeData:self.section];
+        [[PUCClassManager getManager]writeFollowing:self.section];
     }
 }
 
@@ -105,7 +105,8 @@
             
         case 1:
             rows = 4;
-            if ([self.section.linked_sections count]==0) {
+            NSInteger requiredCount = [[PUCClassManager getManager]getRequiredSectionsBy:self.section];
+            if (requiredCount==0) {
                 rows--;
             }
             break;
@@ -140,15 +141,15 @@
         case 0:
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = self.section.schedule.course.title;
+                    cell.textLabel.text = self.section.course.name;
                     break;
                 case 1:
                     cell.textLabel.text = @"Credit:";
-                    cell.detailTextLabel.text = self.section.schedule.course.credit;
+                    cell.detailTextLabel.text = @"1";
                     break;
                 case 2:
                 {
-                    NSString *desc = [NSString stringWithFormat:@"Description: %@", self.section.schedule.course.description];
+                    NSString *desc = [NSString stringWithFormat:@"Description: %@", self.section.course.description];
                     [((PUCDescriptionCell *)cell) addText:desc];
                     break;
                 }
@@ -162,7 +163,7 @@
                     break;
                 case 1:
                     cell.textLabel.text = @"Section Type:";
-                    cell.detailTextLabel.text = self.section.schedule.type_name;
+                    cell.detailTextLabel.text = self.section.type;
                     break;
                 case 2:
                     cell.textLabel.text = @"Section Number:";
@@ -178,13 +179,7 @@
             switch (indexPath.row) {
                 case 0:{
                     cell.textLabel.text = @"Day Of Week:";
-                    NSMutableString * days = [[NSMutableString alloc]init];
-                    for (PUCMeeting * meeting in self.section.meetings)
-                    {
-                        if (![days containsString:[meeting.DayOfWeek substringToIndex:3]])
-                            [days appendFormat:@"%@,",[meeting.DayOfWeek substringToIndex:3]];
-                    }
-                    cell.detailTextLabel.text = [days substringToIndex:[days length]-1];
+                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).days;
                     break;}
                 case 1:
                     cell.textLabel.text = @"Instructor:";
@@ -192,17 +187,15 @@
                     break;
                 case 2:
                     cell.textLabel.text = @"Building:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).building;
+                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).location;
                     break;
                 case 3:
                     cell.textLabel.text = @"Room:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).room;
+                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).location;
                     break;
                 case 4:
                     cell.textLabel.text = @"Time:";
-                    NSInteger start_t = ((PUCMeeting*)self.section.meetings[0]).start_t;
-                    NSInteger end_t = ((PUCMeeting*)self.section.meetings[0]).end_t;
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", start_t/60, start_t%60, start_t%60==0?@"0":@"", end_t/60, end_t%60, end_t%60==0?@"0":@""];
+                    cell.detailTextLabel.text = self.section.time;
                     break;
             }
             break;
@@ -236,7 +229,7 @@
 {
     if (indexPath.section == 0 && indexPath.row == 2){
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 6), 20000.0f);
-        CGSize size = [[NSString stringWithFormat:@"Description: %@", self.section.schedule.course.description] sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [[NSString stringWithFormat:@"Description: %@", self.section.course.description] sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
         return  MAX(size.height, 44.0f);
     }else
     {
@@ -293,7 +286,7 @@
     if ([[segue identifier] isEqualToString:@"sectionToLink"]){
         PUCLinkedSectionViewController * destinationVC = [segue destinationViewController];
         // Pass the selected object to the new view controller.
-        destinationVC.sections = self.section.linked_sections;
+        destinationVC.sections = nil;
     }
 }
 

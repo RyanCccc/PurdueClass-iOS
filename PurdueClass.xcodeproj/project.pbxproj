@@ -14,14 +14,13 @@
 		04848EB118CD8CA1004081D4 /* PUCFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */; };
 		049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */; };
 		049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD318C973C900A3F361 /* PUCCourse.m */; };
-		049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD618C9747300A3F361 /* PUCTerm.m */; };
-		049BAFDA18C974D100A3F361 /* PUCSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFD918C974D100A3F361 /* PUCSchedule.m */; };
 		049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFDC18C9761F00A3F361 /* PUCSection.m */; };
 		049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */ = {isa = PBXBuildFile; fileRef = 049BAFDF18C976F800A3F361 /* PUCMeeting.m */; };
 		04BBE5F218CAD1B5006B8E49 /* PUCClassManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE5F118CAD1B5006B8E49 /* PUCClassManager.m */; };
 		04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */; };
 		04D7F35818CBFCF600875CD7 /* PUCSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */; };
 		04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D7F35A18CBFF4500875CD7 /* PUCTestTableViewController.m */; };
+		04F849DB18E64E85004278FF /* PUCSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F849DA18E64E85004278FF /* PUCSubject.m */; };
 		04FFC07918C8EF7E00049790 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07818C8EF7E00049790 /* Foundation.framework */; };
 		04FFC07B18C8EF7E00049790 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07A18C8EF7E00049790 /* CoreGraphics.framework */; };
 		04FFC07D18C8EF7E00049790 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FFC07C18C8EF7E00049790 /* UIKit.framework */; };
@@ -63,10 +62,6 @@
 		049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSubjectViewController.m; sourceTree = "<group>"; };
 		049BAFD218C973C900A3F361 /* PUCCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCCourse.h; sourceTree = "<group>"; };
 		049BAFD318C973C900A3F361 /* PUCCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCCourse.m; sourceTree = "<group>"; };
-		049BAFD518C9747300A3F361 /* PUCTerm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCTerm.h; sourceTree = "<group>"; };
-		049BAFD618C9747300A3F361 /* PUCTerm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCTerm.m; sourceTree = "<group>"; };
-		049BAFD818C974D100A3F361 /* PUCSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSchedule.h; sourceTree = "<group>"; };
-		049BAFD918C974D100A3F361 /* PUCSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSchedule.m; sourceTree = "<group>"; };
 		049BAFDB18C9761F00A3F361 /* PUCSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSection.h; sourceTree = "<group>"; };
 		049BAFDC18C9761F00A3F361 /* PUCSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSection.m; sourceTree = "<group>"; };
 		049BAFDE18C976F800A3F361 /* PUCMeeting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCMeeting.h; sourceTree = "<group>"; };
@@ -79,6 +74,8 @@
 		04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSectionCell.m; sourceTree = "<group>"; };
 		04D7F35918CBFF4500875CD7 /* PUCTestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCTestTableViewController.h; sourceTree = "<group>"; };
 		04D7F35A18CBFF4500875CD7 /* PUCTestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCTestTableViewController.m; sourceTree = "<group>"; };
+		04F849D918E64E85004278FF /* PUCSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSubject.h; sourceTree = "<group>"; };
+		04F849DA18E64E85004278FF /* PUCSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSubject.m; sourceTree = "<group>"; };
 		04FFC07518C8EF7E00049790 /* PurdueClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PurdueClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04FFC07818C8EF7E00049790 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04FFC07A18C8EF7E00049790 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,12 +125,10 @@
 		049BAFD118C972B300A3F361 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04F849D918E64E85004278FF /* PUCSubject.h */,
+				04F849DA18E64E85004278FF /* PUCSubject.m */,
 				049BAFD218C973C900A3F361 /* PUCCourse.h */,
 				049BAFD318C973C900A3F361 /* PUCCourse.m */,
-				049BAFD518C9747300A3F361 /* PUCTerm.h */,
-				049BAFD618C9747300A3F361 /* PUCTerm.m */,
-				049BAFD818C974D100A3F361 /* PUCSchedule.h */,
-				049BAFD918C974D100A3F361 /* PUCSchedule.m */,
 				049BAFDB18C9761F00A3F361 /* PUCSection.h */,
 				049BAFDC18C9761F00A3F361 /* PUCSection.m */,
 				049BAFDE18C976F800A3F361 /* PUCMeeting.h */,
@@ -191,10 +186,10 @@
 				046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */,
 				0443CAA118CBA41A004C524F /* PUCSectionViewController.h */,
 				0443CAA218CBA41A004C524F /* PUCSectionViewController.m */,
-				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
-				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
 				04BBE5F318CAF258006B8E49 /* PUCCourseViewController.h */,
 				04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */,
+				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
+				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
 				04D7F35618CBFCF600875CD7 /* PUCSectionCell.h */,
 				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
 				04D7F35918CBFF4500875CD7 /* PUCTestTableViewController.h */,
@@ -375,7 +370,6 @@
 				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
 				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
-				049BAFDA18C974D100A3F361 /* PUCSchedule.m in Sources */,
 				04FFC08518C8EF7E00049790 /* main.m in Sources */,
 				046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */,
 				049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */,
@@ -383,9 +377,9 @@
 				0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */,
 				04D7F35818CBFCF600875CD7 /* PUCSectionCell.m in Sources */,
 				04848EAE18CD7FDC004081D4 /* PUCLinkedSectionViewController.m in Sources */,
-				049BAFD718C9747300A3F361 /* PUCTerm.m in Sources */,
 				04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */,
 				04FFC08918C8EF7E00049790 /* PUCAppDelegate.m in Sources */,
+				04F849DB18E64E85004278FF /* PUCSubject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,23 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PUCTerm.h"
+#import "PUCSubject.h"
 
 @interface PUCCourse : NSObject
 
-@property (strong, nonatomic) NSString *subject;
-@property (strong, nonatomic) NSString *subject_name;
 @property (strong, nonatomic) NSString *CNBR;
-@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *description;
-@property (strong, nonatomic) NSString *credit;
-@property (strong, nonatomic) NSString *code;
-@property (strong, nonatomic) PUCTerm *term;
-@property (strong, nonatomic) NSArray* schedules;
+@property (strong, nonatomic) NSArray* sections;
+@property (strong, nonatomic) PUCSubject* subject;
 
-
-- (instancetype)initWithJSON:(id) JSON;
-
-+ (NSArray *)getSubjects;
++ (NSArray *)initWithMultiCourses:(NSDictionary *) courses_raw by:(PUCSubject *)subject;
 
 @end

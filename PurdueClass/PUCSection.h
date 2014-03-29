@@ -7,20 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PUCSchedule.h"
+#import "PUCCourse.h"
 
 @interface PUCSection : NSObject
 
-@property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* number;
 @property (strong, nonatomic) NSString* crn;
-@property (strong, nonatomic) NSArray* linked_sections;
-@property (strong, nonatomic) NSArray* meetings;
-@property (nonatomic) NSInteger start_t;
-@property (nonatomic) NSInteger end_t;
-@property (strong, nonatomic) PUCSchedule* schedule;
+@property (strong, nonatomic) NSString* linked_id;
+@property (strong, nonatomic) NSString* required_linked_id;
+@property (strong, nonatomic) NSString* type;
+@property (strong, nonatomic) NSString* time;
 
-+ (NSArray *)initWithMultiSections:(id) JSON;
-+ (NSArray *)initWithLinkedSections:(id) JSON;
+@property (strong, nonatomic) NSArray* meetings;
+@property (strong, nonatomic) PUCCourse* course;
+
++ (NSArray *)initWithMultiSections:(NSArray *) sections_raw by:(PUCCourse *)course;
 
 @end

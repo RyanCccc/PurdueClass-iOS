@@ -8,58 +8,30 @@
 
 #import "PUCSection.h"
 #import "PUCMeeting.h"
+#import "PUCCourse.h"
 #import "PUCClassManager.h"
 
 @implementation PUCSection
 
-- (instancetype)initWithJSON:(id) JSON forLinkedSection:(BOOL) forLinked
++ (NSArray *)initWithMultiSections:(NSArray *) sections_raw by:(PUCCourse *)course
 {
-    self = [super init];
-    
-    if(self){
-        NSDictionary * section = (NSDictionary *)JSON;
-        self.name = [section objectForKey:@"name"];
-        self.number = [section objectForKey:@"number"];
-        self.crn = [section objectForKey:@"crn"];
-        self.meetings = [PUCMeeting initWithMultiMeetings:[section objectForKey:@"meetings"]];
-        self.linked_sections = [PUCSection initWithLinkedSections:[section objectForKey:@"linked_sections"]];
-        for (PUCMeeting* meeting in self.meetings)
-        {
-            meeting.section = self;
-        }
-        self.start_t = ((PUCMeeting*)self.meetings[0]).start_t;
-        self.end_t = ((PUCMeeting*)self.meetings[0]).end_t;
-        if (!forLinked) {
-            PUCClassManager * mng = [PUCClassManager getManager];
-            [mng.sections addObject:self];
-        }
-    }
-    return self;
-}
-
-+ (NSArray *)initWithMultiSections:(id) JSON
-{
-    NSMutableArray * sections = [[NSMutableArray alloc]init];
-    NSArray* sections_JSON = (NSArray*)JSON;
-    for (NSArray* section_JSON in sections_JSON)
+    NSMutableArray* sections = [[NSMutableArray alloc]init];
+    for (NSDictionary * section_raw in sections_raw)
     {
-        [sections addObject:[[PUCSection alloc]initWithJSON:section_JSON forLinkedSection:false]];
-    }
-    return sections;
-}
-
-+ (NSArray *)initWithLinkedSections:(id) JSON
-{
-    NSMutableArray * sections = [[NSMutableArray alloc]init];
-    NSArray* multi_sections_JSON = (NSArray*)JSON;
-    for (NSArray* sections_JSON in multi_sections_JSON)
-    {
-        NSMutableArray * section_set = [[NSMutableArray alloc]init];
-        for (id section in sections_JSON)
+        PUCSection * section = [[PUCSection alloc]init];
+        section.crn = [section_raw objectForKey:@"crn"];
+        section.number = [section_raw objectForKey:@"crn"];
+        NSString * linked_id = [section_raw objectForKey:@"linked_id"];
+        if (linked_id != nil)
         {
-            [section_set addObject:[[PUCSection alloc]initWithJSON:section forLinkedSection:true]];
+            section.linked_id = linked_id;
+            section.required_linked_id = [section_raw objectForKey:@"required_link_id"];
         }
-        [sections addObject:[section_set copy]];
+        section.course = course;
+        
+        section.meetings = [PUCMeeting initWithMultiMeetings:[section_raw objectForKey:@"meetings"] by:section];
+        [[[PUCClassManager getManager]sections] addObject:section];
+        [sections addObject:section];
     }
     return sections;
 }

@@ -22,6 +22,7 @@
         self.rightLabel.textAlignment = NSTextAlignmentRight;
         self.downRightLabel.textAlignment = NSTextAlignmentRight;
         
+        self.leftLabel.font = [UIFont fontWithName:@"STHeitiJ-Medium" size:15.0];
         self.downLeftLabel.font = [UIFont fontWithName:@"STHeitiJ-Medium" size:10.0];
         self.downRightLabel.font = [UIFont fontWithName:@"STHeitiJ-Medium" size:10.0];
         

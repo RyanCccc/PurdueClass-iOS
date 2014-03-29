@@ -11,31 +11,26 @@
 
 @implementation PUCMeeting
 
-- (instancetype)initWithJSON:(id) JSON
++ (NSArray *)initWithMultiMeetings:(NSArray *)meetings_raw by:(PUCSection *)section
 {
-    self = [super init];
-    
-    if(self){
-        NSDictionary * meeting = (NSDictionary *)JSON;
-        self.DayOfWeek = [meeting objectForKey:@"DayOfWeek"];
-        self.instructor = [meeting objectForKey:@"instructor"];
-        self.building = [meeting objectForKey:@"building"];
-        self.room = [meeting objectForKey:@"room"];
-        self.start_t = [[meeting objectForKey:@"start_t"]integerValue];
-        self.end_t = [[meeting objectForKey:@"end_t"]integerValue];
-        PUCClassManager * mng = [PUCClassManager getManager];
-        [mng.meetings addObject:self];
-    }
-    return self;
-}
-
-+ (NSArray *)initWithMultiMeetings:(id) JSON
-{
-    NSArray * meetings_JSON = (NSArray *)JSON;
-    NSMutableArray * meetings = [[NSMutableArray alloc]init];
-    for (id meeting in meetings_JSON)
-    {
-        [meetings addObject:[[PUCMeeting alloc]initWithJSON:meeting]];
+    NSMutableArray* meetings = [[NSMutableArray alloc]init];
+    for (NSDictionary* meeting_raw in meetings_raw) {
+        PUCMeeting * meeting = [[PUCMeeting alloc]init];
+        meeting.days = [meeting_raw objectForKey:@"days"];
+        meeting.date = [meeting_raw objectForKey:@"date"];
+        meeting.instructor = [meeting_raw objectForKey:@"instructor"];
+        meeting.location = [meeting_raw objectForKey:@"location"];
+        meeting.time = [[meeting_raw objectForKey:@"time"] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        meeting.type = [meeting_raw objectForKey:@"type"];
+        meeting.section = section;
+        if (section.type == nil) {
+            section.type = meeting.type;
+        }
+        if (section.time == nil) {
+            section.time = meeting.time;
+        }
+        [[[PUCClassManager getManager]meetings] addObject:meeting];
+        [meetings addObject:meeting];
     }
     return meetings;
 }

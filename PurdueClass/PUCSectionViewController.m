@@ -22,6 +22,7 @@
 
 @implementation PUCSectionViewController
 
+/*
 - (void)connect
 {
     NSString *urlStr = [NSString stringWithFormat:@"http://purdue-class.chenrendong.com/course/subject/%@/%@/", self.subject, self.CNBR];
@@ -41,17 +42,19 @@
         [alert show];
     }];
 }
+ */
 
 - (void)refresh
 {
-    self.filteredSections = [PUCClassManager getManager].sections;
+    self.filteredSections = self.course.sections;
     [self.tableView reloadData];
     
-    NSMutableArray* types = [[NSMutableArray alloc]init];
-    for (PUCSchedule * schedule in [PUCClassManager getManager].schedules)
+    NSMutableSet* types_set = [[NSMutableSet alloc]init];
+    for (PUCSection * section in self.course.sections)
     {
-        [types addObject: schedule.type_id];
+        [types_set addObject: section.type];
     }
+    NSArray* types = [types_set allObjects];
     for (int i=0; i<[types count]; i++)
         [self.segmentedControl insertSegmentWithTitle:[types objectAtIndex:i] atIndex:i+1 animated:NO];
     self.segmentedControl.selectedSegmentIndex = 0;
@@ -73,18 +76,16 @@
 {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     NSString * segTitle = [segmentedControl titleForSegmentAtIndex: [segmentedControl selectedSegmentIndex]];
-    PUCSchedule * selectedSchedule = nil;
     if ([segTitle isEqualToString:@"All"]) {
-        self.filteredSections = [PUCClassManager getManager].sections;
+        self.filteredSections = self.course.sections;
     }else{
-        for (PUCSchedule * schedule in [PUCClassManager getManager].schedules)
-        {
-            if ([schedule.type_id isEqualToString:segTitle])
-            {
-                selectedSchedule = schedule;
+        NSMutableArray * tmp_sections = [[NSMutableArray alloc]init];
+        for (PUCSection* section in self.course.sections) {
+            if ([section.type isEqualToString:segTitle]) {
+                [tmp_sections addObject:section];
             }
         }
-        self.filteredSections = selectedSchedule.sections;
+        self.filteredSections = [NSArray arrayWithArray:tmp_sections];
     }
     [self.tableView reloadData];
 }
@@ -101,19 +102,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[PUCClassManager getManager]clearCourse];
     [self.segmentedControl removeAllSegments];
     [self.segmentedControl insertSegmentWithTitle:@"All" atIndex:0 animated:NO];
+    [self refresh];
     
-    self.title = [NSString stringWithFormat:@"%@%@", self.subject, self.CNBR];
-    
+    self.title = [NSString stringWithFormat:@"%@%@", self.course.subject.subject, self.course.CNBR];
+    /*
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     spinner.center = CGPointMake(160, 200);
     spinner.tag = 12;
     [self.view addSubview:spinner];
     [spinner startAnimating];
-    
-    [self connect];
+    */
+    //[self connect];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -214,21 +215,22 @@
     
     if (self.filteredSections != nil)
     {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"start_t" ascending:YES];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
         NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
         
         PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
         cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
-        cell.leftLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", section.start_t/60, section.start_t%60, section.start_t%60==0?@"0":@"", section.end_t/60, section.end_t%60, section.end_t%60==0?@"0":@""];
+        cell.leftLabel.text = section.time;
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", section.number];
-        cell.downRightLabel.text = [section.linked_sections count]==0?@"No required sections":[NSString stringWithFormat:@"* %d required section", [section.linked_sections count]];
+        NSInteger requiredCount = [[PUCClassManager getManager]getRequiredSectionsBy:section];
+        cell.downRightLabel.text = requiredCount==0?@"No required sections":[NSString stringWithFormat:@"* %ld required section", (long)requiredCount];
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"start_t" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
     NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     
     PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];

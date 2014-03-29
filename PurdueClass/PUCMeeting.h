@@ -11,15 +11,15 @@
 
 @interface PUCMeeting : NSObject
 
-@property (strong, nonatomic) NSString* DayOfWeek;
+@property (strong, nonatomic) NSString* days;
+@property (strong, nonatomic) NSString* date;
 @property (strong, nonatomic) NSString* instructor;
-@property (strong, nonatomic) NSString* building;
-@property (strong, nonatomic) NSString* room;
-@property (nonatomic) NSInteger start_t;
-@property (nonatomic) NSInteger end_t;
+@property (strong, nonatomic) NSString* location;
+@property (strong, nonatomic) NSString* time;
+@property (strong, nonatomic) NSString* type;
+
 @property (strong, nonatomic) PUCSection* section;
 
-- (instancetype)initWithJSON:(id) JSON;
-+ (NSArray *)initWithMultiMeetings:(id) JSON;
++ (NSArray *)initWithMultiMeetings:(NSArray *)meetings_raw by:(PUCSection *)section;
 
 @end

@@ -8,7 +8,8 @@
 
 #import "PUCSubjectViewController.h"
 #import "PUCCourseViewController.h"
-#import "PUCCourse.h"
+#import "PUCClassManager.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @interface PUCSubjectViewController ()
 
@@ -33,14 +34,6 @@
     return _titles;
 }
 
-- (NSArray *)subjects
-{
-    if (_subjects == nil) {
-        _subjects = [PUCCourse getSubjects];
-    }
-    return _subjects;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -53,7 +46,73 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[PUCClassManager getManager]clearCourse];
+    NSArray * data = [[PUCClassManager getManager]readCoursesforTerm:@"Fall2014"];
+    if (data==nil) {
+        NSString *urlStr = [NSString stringWithFormat:@"http://purdue-class.chenrendong.com/course/json/all/%@/", @"Fall2014"];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[PUCClassManager getManager]writeCourses:responseObject forTerm:@"Fall2014"];
+            NSArray * data = (NSArray *)responseObject;
+            [PUCClassManager getManager].subjects = [PUCSubject initWithMultiSubjects:data];
+            // TODO
+            NSArray * subjects_old = [[PUCClassManager getManager]subjects];
+            NSMutableArray* subjects_raw = [[NSMutableArray alloc]init];
+            for (PUCSubject* subject in subjects_old) {
+                NSArray* subject_array = @[subject.subject, subject.subject_name];
+                [subjects_raw addObject:subject_array];
+            }
+            
+            NSMutableArray * subjects_tmp = [[NSMutableArray alloc]init];
+            unichar first_c = 'A';
+            NSMutableArray * current_list = [[NSMutableArray alloc]init];
+            for (NSArray * sub_detail in subjects_raw) {
+                NSString *sub = (NSString *)sub_detail[0];
+                if (first_c == [sub characterAtIndex:0]){
+                    [current_list addObject:[sub_detail copy]];
+                }else{
+                    first_c = [sub characterAtIndex:0];
+                    [subjects_tmp addObject:[current_list copy]];
+                    [current_list removeAllObjects];
+                    [current_list addObject:[sub_detail copy]];
+                }
+            }
+            [subjects_tmp addObject:[current_list copy]];
+            self.subjects = [NSArray arrayWithArray:subjects_tmp];
+            [[self courseTable]reloadData];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }else{
+        [PUCClassManager getManager].subjects = [PUCSubject initWithMultiSubjects:data];
+        // TODO
+        NSArray * subjects_old = [[PUCClassManager getManager]subjects];
+        NSMutableArray* subjects_raw = [[NSMutableArray alloc]init];
+        for (PUCSubject* subject in subjects_old) {
+            NSArray* subject_array = @[subject.subject, subject.subject_name];
+            [subjects_raw addObject:subject_array];
+        }
+        
+        NSMutableArray * subjects_tmp = [[NSMutableArray alloc]init];
+        unichar first_c = 'A';
+        NSMutableArray * current_list = [[NSMutableArray alloc]init];
+        for (NSArray * sub_detail in subjects_raw) {
+            NSString *sub = (NSString *)sub_detail[0];
+            if (first_c == [sub characterAtIndex:0]){
+                [current_list addObject:[sub_detail copy]];
+            }else{
+                first_c = [sub characterAtIndex:0];
+                [subjects_tmp addObject:[current_list copy]];
+                [current_list removeAllObjects];
+                [current_list addObject:[sub_detail copy]];
+            }
+        }
+        [subjects_tmp addObject:[current_list copy]];
+        self.subjects = [NSArray arrayWithArray:subjects_tmp];
+        [[self courseTable]reloadData];
+    }
 
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -168,11 +227,12 @@
     // Pass the selected object to the new view controller.
    if ([[segue identifier] isEqualToString:@"subjectToCourse"]) {
        PUCCourseViewController *destinationVc = [segue destinationViewController];
-       if (self.selectedSubject != destinationVc.subject) {
-           destinationVc.needToRefresh = true;
+       for (PUCSubject* subject in [PUCClassManager getManager].subjects) {
+           if ([subject.subject isEqualToString:self.selectedSubject]) {
+               destinationVc.subject = subject;
+               break;
+           }
        }
-       destinationVc.subject = self.selectedSubject;
-       
    }
     
 }

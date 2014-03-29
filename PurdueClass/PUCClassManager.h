@@ -7,22 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PUCCourse.h"
-#import "PUCSchedule.h"
 #import "PUCSection.h"
+#import "PUCSubject.h"
 #import "PUCMeeting.h"
+#import "PUCCourse.h"
 
 @interface PUCClassManager : NSObject
 
-@property (strong, nonatomic)NSMutableArray *schedules;
-@property (strong, nonatomic)NSMutableArray *sections;
-@property (strong, nonatomic)NSMutableArray *meetings;
-@property (strong, nonatomic)PUCCourse* course;
-@property (strong, nonatomic)NSString *plistPath;
+@property (strong, nonatomic)NSMutableArray * sections;
+@property (strong, nonatomic)NSMutableArray * meetings;
+@property (strong, nonatomic)NSMutableArray * courses;
+@property (strong, nonatomic)NSMutableArray * subjects;
+@property (strong, nonatomic)NSString *followPath;
 
 + (PUCClassManager *)getManager;
-- (void) getCourse:(id) JSON;
+- (void) getDataFor:(NSString *)term;
 - (void) clearCourse;
-- (void)writeData:(id)data;
-
+- (BOOL)writeFollowing:(id)data;
+- (BOOL)writeCourses:(NSString* )data forTerm:(NSString *)term;
+- (NSArray*)readCoursesforTerm:(NSString *)term;
+- (NSInteger) getRequiredSectionsBy:(PUCSection*) section;
 @end

@@ -123,7 +123,7 @@
         
         PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
         cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
-        cell.leftLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", section.start_t/60, section.start_t%60, section.start_t%60==0?@"0":@"", section.end_t/60, section.end_t%60, section.end_t%60==0?@"0":@""];
+        cell.leftLabel.text = section.time;
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", section.number];
         //cell.downRightLabel.text = [section.linked_sections count]==0?@"No required sections":[NSString stringWithFormat:@"* %d required section", [section.linked_sections count]];
     }

@@ -12,7 +12,9 @@
 
 @interface PUCCourseViewController ()
 
+// Get by subject
 @property (strong, nonatomic) NSArray * CNBRs;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSString * selectedCNBR;
 
@@ -60,6 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    /*
     if (self.needToRefresh) {
         UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         spinner.center = CGPointMake(160, 200);
@@ -67,6 +70,7 @@
         [self.view addSubview:spinner];
         [spinner startAnimating];
     }
+     */
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -77,16 +81,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = self.subject;
+    self.title = self.subject.subject;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (self.needToRefresh) {
-        [self connect];
-        self.needToRefresh = false;
+        //[self connect];
+    NSMutableArray* courses_crns = [[NSMutableArray alloc]init];
+    for (PUCCourse* course in self.subject.courses) {
+        [courses_crns addObject:course.CNBR];
     }
+    self.CNBRs = [NSArray arrayWithArray:courses_crns];
+    self.CNBRs = [self.CNBRs sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -173,8 +181,17 @@
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"courseToSection"]) {
         PUCSectionViewController *destinationVc = [segue destinationViewController];
-        destinationVc.subject = self.subject;
-        destinationVc.CNBR = self.selectedCNBR;
+        for (PUCSubject* subject in [PUCClassManager getManager].subjects) {
+            if ([subject.subject isEqualToString:self.subject.subject]) {
+                for (PUCCourse* course in subject.courses) {
+                    if ([course.CNBR isEqualToString:self.selectedCNBR]) {
+                        destinationVc.course = course;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
     
 }

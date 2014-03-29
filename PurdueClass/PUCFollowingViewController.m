@@ -40,7 +40,7 @@
 {
     [super viewWillAppear:animated];
     
-    NSArray * list = [NSArray arrayWithContentsOfFile:[PUCClassManager getManager].plistPath];
+    NSArray * list = [NSArray arrayWithContentsOfFile:[PUCClassManager getManager].followPath];
     if (list!=nil) {
         self.followList = list;
     }else
