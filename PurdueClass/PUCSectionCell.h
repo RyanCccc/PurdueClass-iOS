@@ -15,5 +15,6 @@
 @property (strong, nonatomic)UILabel * downLeftLabel;
 @property (strong, nonatomic)UILabel * rightLabel;
 @property (strong, nonatomic)UILabel * downRightLabel;
+@property (strong, nonatomic)NSString *crn;
 
 @end

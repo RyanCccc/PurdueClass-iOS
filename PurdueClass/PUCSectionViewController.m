@@ -180,30 +180,30 @@
     static NSString *CellIdentifier = @"Cell";
     PUCSectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    PUCSection * section = nil;
+    if (self.filteredSections != nil)
+    {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+        NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+        
+        section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
+    }
     // Configure the cell...
     if (cell == nil) {
-        
-        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
         
-        [leftUtilityButtons sw_addUtilityButtonWithColor:
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
          [UIColor colorWithRed:0.07 green:0.75f blue:0.16f alpha:1.0]
                                                     title:@"Seats"];
-        [leftUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:1.0f green:0.5f blue:0.35f alpha:1.0]
-                                                   title:@"Requires"];
-        [rightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                    title:@"More"];
         [rightUtilityButtons sw_addUtilityButtonWithColor:
          [UIColor colorWithRed:0.188f green:0.231f blue:1.0f alpha:1.0f]
                                                     title:@"Follow"];
         cell = [[PUCSectionCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                      reuseIdentifier:CellIdentifier
                                  containingTableView:self.tableView // For row height and selection
-                                  leftUtilityButtons:leftUtilityButtons
+                                  leftUtilityButtons:nil
                                  rightUtilityButtons:rightUtilityButtons];
-        cell.delegate = self;
+        cell.delegate = [PUCClassManager getManager];
     }
     
    // NSArray * sections_for_cell = nil;
@@ -214,16 +214,13 @@
     //sections_for_cell = [PUCClassManager getManager].sections;
     //}
     
-    if (self.filteredSections != nil)
+    if (section != nil)
     {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
-        NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
-        
-        PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
         cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
         cell.leftLabel.text = section.time;
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", section.number];
         cell.downRightLabel.text = section.linkedSections==nil?@"No linked sections":@"* Require linked section";
+        cell.crn = section.crn;
     }
     return cell;
 }

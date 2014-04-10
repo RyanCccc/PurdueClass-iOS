@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PUCSubjectViewController : UITableViewController
+@interface PUCSubjectViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate>
 
 @end

@@ -11,22 +11,36 @@
 #import "PUCSubject.h"
 #import "PUCMeeting.h"
 #import "PUCCourse.h"
+#import "PUCLoadingView.h"
+#import <SWTableViewCell.h>
 
-@interface PUCClassManager : NSObject
+@interface PUCClassManager : NSObject<SWTableViewCellDelegate>
 
 @property (strong, nonatomic)NSDictionary* catalogs;
 @property (strong, nonatomic)NSMutableArray * sections;
 @property (strong, nonatomic)NSMutableArray * meetings;
 @property (strong, nonatomic)NSMutableArray * courses;
 @property (strong, nonatomic)NSMutableArray * subjects;
-@property (strong, nonatomic)NSString *followPath;
+@property (strong, nonatomic)NSString *term;
+@property (strong, nonatomic)NSArray *terms;
+@property (strong, nonatomic)PUCLoadingView *loadingView;
+
 
 + (PUCClassManager *)getManager;
-- (void) getDataFor:(NSString *)term action:(void(^)())handler;
+- (void) getDataByAction:(void(^)())handler;
 - (void) clearCourse;
 - (BOOL)writeFollowing:(id)data;
+- (NSArray *)readFollowing;
 - (BOOL)deleteFollowing:(NSString*)crn;
 - (BOOL)writeCourses:(NSString* )data forTerm:(NSString *)term;
-- (NSArray*)readCoursesforTerm:(NSString *)term;
 - (NSInteger) getRequiredSectionsBy:(PUCSection*) section;
+-(void) getSeatsByCRN:(NSString* )crn forTerm:(NSString *)term action:(void(^)(id))handler;
+- (void)stopAnimationOnView:(UITableView*)view;
+- (void)showLoadingViewOn:(UIView*)view withText:(NSString *)text;
+- (PUCSection *)getSectionByCRN:(NSString *)crn;
+- (BOOL)isDataLoaded;
+- (void)setToUnLoad;
+- (BOOL)clearCache;
+- (NSArray*)getTermsByAction:(void(^)())handler;
+
 @end

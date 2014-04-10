@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0404AF5E18F6198800DE393A /* GmailLikeLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */; };
+		0404AF6118F61D8400DE393A /* PUCLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404AF6018F61D8400DE393A /* PUCLoadingView.m */; };
+		04360E0E18F6EDD000AA239E /* PUCTermViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04360E0D18F6EDD000AA239E /* PUCTermViewController.m */; };
 		0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443CAA218CBA41A004C524F /* PUCSectionViewController.m */; };
 		046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */; };
 		046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */; };
@@ -51,6 +53,10 @@
 /* Begin PBXFileReference section */
 		0404AF5C18F6198800DE393A /* GmailLikeLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailLikeLoadingView.h; sourceTree = "<group>"; };
 		0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailLikeLoadingView.m; sourceTree = "<group>"; };
+		0404AF5F18F61D8400DE393A /* PUCLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCLoadingView.h; sourceTree = "<group>"; };
+		0404AF6018F61D8400DE393A /* PUCLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCLoadingView.m; sourceTree = "<group>"; };
+		04360E0C18F6EDD000AA239E /* PUCTermViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCTermViewController.h; sourceTree = "<group>"; };
+		04360E0D18F6EDD000AA239E /* PUCTermViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCTermViewController.m; sourceTree = "<group>"; };
 		0443CAA118CBA41A004C524F /* PUCSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSectionViewController.h; sourceTree = "<group>"; };
 		0443CAA218CBA41A004C524F /* PUCSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSectionViewController.m; sourceTree = "<group>"; };
 		046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCDetailViewController.h; sourceTree = "<group>"; };
@@ -128,6 +134,10 @@
 		0404AF5A18F6190200DE393A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				0404AF5C18F6198800DE393A /* GmailLikeLoadingView.h */,
+				0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */,
+				0404AF5F18F61D8400DE393A /* PUCLoadingView.h */,
+				0404AF6018F61D8400DE393A /* PUCLoadingView.m */,
 				04D7F35618CBFCF600875CD7 /* PUCSectionCell.h */,
 				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
 				046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */,
@@ -151,6 +161,8 @@
 				04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */,
 				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
 				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
+				04360E0C18F6EDD000AA239E /* PUCTermViewController.h */,
+				04360E0D18F6EDD000AA239E /* PUCTermViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -168,8 +180,6 @@
 				049BAFDF18C976F800A3F361 /* PUCMeeting.m */,
 				04BBE5F018CAD1B5006B8E49 /* PUCClassManager.h */,
 				04BBE5F118CAD1B5006B8E49 /* PUCClassManager.m */,
-				0404AF5C18F6198800DE393A /* GmailLikeLoadingView.h */,
-				0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -302,6 +312,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Rendong Chen";
 				TargetAttributes = {
+					04FFC07418C8EF7E00049790 = {
+						DevelopmentTeam = ZPGM9PMUAK;
+					};
 					04FFC09518C8EF7E00049790 = {
 						TestTargetID = 04FFC07418C8EF7E00049790;
 					};
@@ -389,10 +402,12 @@
 				049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */,
 				04848EB118CD8CA1004081D4 /* PUCFollowingViewController.m in Sources */,
 				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
+				04360E0E18F6EDD000AA239E /* PUCTermViewController.m in Sources */,
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
 				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
 				04FFC08518C8EF7E00049790 /* main.m in Sources */,
 				0404AF5E18F6198800DE393A /* GmailLikeLoadingView.m in Sources */,
+				0404AF6118F61D8400DE393A /* PUCLoadingView.m in Sources */,
 				046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */,
 				049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */,
 				049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */,
@@ -529,10 +544,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
 				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -543,10 +561,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
 				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -9,9 +9,12 @@
 #import "PUCFollowingViewController.h"
 #import "PUCClassManager.h"
 #import "PUCSectionCell.h"
+#import "PUCDetailViewController.h"
 
 @interface PUCFollowingViewController ()
 
+@property (strong, nonatomic)UIActionSheet* popup;
+@property (strong, nonatomic)PUCSection* selectedSection;
 @end
 
 @implementation PUCFollowingViewController
@@ -24,10 +27,18 @@
     }
     return self;
 }
+- (IBAction)popUpActions:(id)sender {
+    [self.popup showInView:[self.view window]];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.popup = [[UIActionSheet alloc] initWithTitle:@"Select options"
+                                             delegate:self
+                                    cancelButtonTitle:@"Cancel"
+                               destructiveButtonTitle:nil
+                                    otherButtonTitles:@"Clear cache", nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -35,9 +46,50 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //clean
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                        message:@"Are you sure you want to clear cache?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"Clear", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==1) {
+        [self clearCache];
+    }
+}
+
+- (void)clearCache
+{
+    BOOL success = [[PUCClassManager getManager]clearCache];
+    if (success) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                        message:@"Cleared cache!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                        message:@"Failed to clear cache!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
 - (void)refreshFollowList
 {
-    NSArray * list = [NSArray arrayWithContentsOfFile:[PUCClassManager getManager].followPath];
+    NSArray * list = [[PUCClassManager getManager] readFollowing];
     if (list!=nil) {
         self.followList = list;
     }else
@@ -78,30 +130,22 @@
     
     // Configure the cell...
     if (cell == nil) {
-        
-        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
         
-        [leftUtilityButtons sw_addUtilityButtonWithColor:
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
          [UIColor colorWithRed:0.07 green:0.75f blue:0.16f alpha:1.0]
                                                    title:@"Seats"];
-        [leftUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:1.0f green:0.5f blue:0.35f alpha:1.0]
-                                                   title:@"Requires"];
-        [rightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                    title:@"More"];
         [rightUtilityButtons sw_addUtilityButtonWithColor:
          [UIColor colorWithRed:1.0f green:0.231f blue:0.2f alpha:1.0f]
                                                     title:@"Delete"];
         cell = [[PUCSectionCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                      reuseIdentifier:CellIdentifier
                                  containingTableView:self.tableView // For row height and selection
-                                  leftUtilityButtons:leftUtilityButtons
+                                  leftUtilityButtons:nil
                                  rightUtilityButtons:rightUtilityButtons];
         cell.delegate = self;
     }
-    
+
     // NSArray * sections_for_cell = nil;
     //
     //if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -114,84 +158,42 @@
     {
         NSDictionary* section =  self.followList[indexPath.row];
         cell.rightLabel.text = [section objectForKey:@"crn"];
-        cell.leftLabel.text = [section objectForKey:@"time"];
+        cell.leftLabel.text = [section objectForKey:@"name"];
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", [section objectForKey:@"number"]];
+        cell.downRightLabel.text = [section objectForKey:@"time"];
+        cell.crn = [section objectForKey:@"crn"];
         //cell.downRightLabel.text = [section.linked_sections count]==0?@"No required sections":[NSString stringWithFormat:@"* %d required section", [section.linked_sections count]];
         
     }
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-            NSLog(@"Seats button was pressed");
-            break;
-        case 1:
-            NSLog(@"Requires button was pressed");
-            break;
-        default:
-            break;
-    }
-}
-
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     PUCClassManager * mng = [PUCClassManager getManager];
     switch (index) {
         case 0:
-            NSLog(@"More button was pressed");
+        {
+            NSLog(@"Seats button was pressed");
+            PUCClassManager *mng = [PUCClassManager getManager];
+            [mng showLoadingViewOn:self.tableView withText:@"Checking seats for you!"];
+            NSString *crn = ((PUCSectionCell*)cell).crn;
+            [mng getSeatsByCRN:crn forTerm:mng.term action:^(id responseObj)
+             {
+                 [mng stopAnimationOnView:self.tableView];
+                 NSDictionary * result = responseObj;
+                 NSNumber *max = [result objectForKey:@"max"];
+                 NSNumber *remain = [result objectForKey:@"remain"];
+                 NSNumber *taken = [result objectForKey:@"taken"];
+                 NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nActual: %@",max, remain, taken];
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Seats"
+                                                                 message:msg
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                 [alert show];
+             }];
             break;
+        }
         case 1:
         {
             BOOL success = [mng deleteFollowing: ((PUCSectionCell*) cell).rightLabel.text];
@@ -216,6 +218,24 @@
         }
         default:
             break;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary* sectionDict =  self.followList[indexPath.row];
+    NSString *crn = [sectionDict objectForKey:@"crn"];
+    PUCSection * section = [[PUCClassManager getManager]getSectionByCRN:crn];
+    self.selectedSection = section;
+    [self performSegueWithIdentifier:@"sectionToDetail" sender:self];
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"sectionToDetail"]) {
+        PUCDetailViewController *destinationVc = [segue destinationViewController];
+        destinationVc.section = self.selectedSection;
     }
 }
 

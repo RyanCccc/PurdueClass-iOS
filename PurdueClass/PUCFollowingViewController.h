@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PUCFollowingViewController : UITableViewController
+@interface PUCFollowingViewController : UITableViewController<UIAlertViewDelegate>
 
 @property (strong, nonatomic)NSArray* followList;
 

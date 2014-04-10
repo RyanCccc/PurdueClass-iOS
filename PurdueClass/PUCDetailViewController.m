@@ -41,8 +41,7 @@
 @implementation PUCDetailViewController
 
 - (IBAction)popUpActions:(id)sender {
-    [self.popup showInView:[self.view window]]  ;
-    NSLog(@"ME");
+    [self.popup showInView:[self.view window]];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -60,12 +59,32 @@
         }else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
-                                                            message:@"Failed to add to follow list!"
+                                                            message:@"Failed to add to follow list!\n(Maybe it's alreayd exist"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
         }
+    }
+    if (buttonIndex == 1) {
+        PUCClassManager *mng = [PUCClassManager getManager];
+        [mng showLoadingViewOn:self.tableView withText:@"Checking seats for you!"];
+        NSString *crn = self.section.crn;
+        [mng getSeatsByCRN:crn forTerm:mng.term action:^(id responseObj)
+         {
+             [mng stopAnimationOnView:self.tableView];
+             NSDictionary * result = responseObj;
+             NSNumber *max = [result objectForKey:@"max"];
+             NSNumber *remain = [result objectForKey:@"remain"];
+             NSNumber *taken = [result objectForKey:@"taken"];
+             NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nActual: %@",max, remain, taken];
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Seats"
+                                                             message:msg
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+             [alert show];
+         }];
     }
 }
 
@@ -81,7 +100,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.section.crn;
+    self.title = [NSString stringWithFormat:@"Section %@", self.section.number];
     self.popup = [[UIActionSheet alloc] initWithTitle:@"Select options"
                                              delegate:self
                                     cancelButtonTitle:@"Cancel"
@@ -138,7 +157,6 @@
     
     // Configure the cell...
     if (cell == nil){
-        
         if (indexPath.section == 1 && indexPath.row == 4){
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
