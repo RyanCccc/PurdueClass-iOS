@@ -10,7 +10,6 @@
 #import "PUCCourseViewController.h"
 #import "PUCClassManager.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "GmailLikeLoadingView.h"
 
 @interface PUCSubjectViewController ()
 
@@ -47,38 +46,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    GmailLikeLoadingView *loadingView = [[GmailLikeLoadingView alloc] initWithFrame:CGRectMake(140, 200, 60, 60)];
-    [self.tableView addSubview:loadingView];
-    [loadingView startAnimating];
-    [[PUCClassManager getManager]getDataFor:@"Fall2014" action:^()
-     {
-         [loadingView stopAnimating];
-         // TODO
-         NSArray * subjects_old = [[PUCClassManager getManager]subjects];
-         NSMutableArray* subjects_raw = [[NSMutableArray alloc]init];
-         for (PUCSubject* subject in subjects_old) {
-             NSArray* subject_array = @[subject.subject, subject.subject_name];
-             [subjects_raw addObject:subject_array];
-         }
-         
-         NSMutableArray * subjects_tmp = [[NSMutableArray alloc]init];
-         unichar first_c = 'A';
-         NSMutableArray * current_list = [[NSMutableArray alloc]init];
-         for (NSArray * sub_detail in subjects_raw) {
-             NSString *sub = (NSString *)sub_detail[0];
-             if (first_c == [sub characterAtIndex:0]){
-                 [current_list addObject:[sub_detail copy]];
-             }else{
-                 first_c = [sub characterAtIndex:0];
-                 [subjects_tmp addObject:[current_list copy]];
-                 [current_list removeAllObjects];
-                 [current_list addObject:[sub_detail copy]];
-             }
-         }
-         [subjects_tmp addObject:[current_list copy]];
-         self.subjects = [NSArray arrayWithArray:subjects_tmp];
-         [[self courseTable]reloadData];
-     }];
+    [[PUCClassManager getManager]getDataFor:@"Fall2014"];
+    // TODO
+    NSArray * subjects_old = [[PUCClassManager getManager]subjects];
+    NSMutableArray* subjects_raw = [[NSMutableArray alloc]init];
+    for (PUCSubject* subject in subjects_old) {
+        NSArray* subject_array = @[subject.subject, subject.subject_name];
+        [subjects_raw addObject:subject_array];
+    }
+    
+    NSMutableArray * subjects_tmp = [[NSMutableArray alloc]init];
+    unichar first_c = 'A';
+    NSMutableArray * current_list = [[NSMutableArray alloc]init];
+    for (NSArray * sub_detail in subjects_raw) {
+        NSString *sub = (NSString *)sub_detail[0];
+        if (first_c == [sub characterAtIndex:0]){
+            [current_list addObject:[sub_detail copy]];
+        }else{
+            first_c = [sub characterAtIndex:0];
+            [subjects_tmp addObject:[current_list copy]];
+            [current_list removeAllObjects];
+            [current_list addObject:[sub_detail copy]];
+        }
+    }
+    [subjects_tmp addObject:[current_list copy]];
+    self.subjects = [NSArray arrayWithArray:subjects_tmp];
+    [[self courseTable]reloadData];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

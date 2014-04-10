@@ -28,6 +28,11 @@
         }
         if (section.time == nil) {
             section.time = meeting.time;
+        }else
+        {
+            if (![section.time isEqualToString:meeting.time]) {
+                section.time = @"Multiple Time";
+            }
         }
         [[[PUCClassManager getManager]meetings] addObject:meeting];
         [meetings addObject:meeting];

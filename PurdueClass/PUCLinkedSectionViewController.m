@@ -9,23 +9,15 @@
 #import "PUCLinkedSectionViewController.h"
 #import "PUCSectionCell.h"
 #import "PUCSection.h"
+#import "PUCDetailViewController.h"
 
 @interface PUCLinkedSectionViewController ()
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic)NSArray* filteredSections;
+@property (strong, nonatomic)PUCSection * selectedSection;
 
 @end
 
 @implementation PUCLinkedSectionViewController
-
-
-- (void)changeSeg: (id)sender
-{
-    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    self.filteredSections = [self.sections objectAtIndex:[segmentedControl selectedSegmentIndex]];
-    [self.tableView reloadData];
-}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,15 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.segmentedControl removeAllSegments];
-    for (int i=0; i<[self.sections count]; i++) {
-        [self.segmentedControl insertSegmentWithTitle:[NSString stringWithFormat:@"Required part %d", i+1]
-                                              atIndex:i
-                                             animated:NO];
-    }
-    self.segmentedControl.selectedSegmentIndex = 0;
-    self.filteredSections = self.sections[0];
-    [self.segmentedControl addTarget:self action:@selector(changeSeg:) forControlEvents:UIControlEventValueChanged];
+    self.title = @"Linked sections";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -65,23 +49,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return [self.filteredSections count];
+    return [self.sections count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     PUCSectionCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     // Configure the cell...
     if (cell == nil) {
         
@@ -116,10 +95,10 @@
     //sections_for_cell = [PUCClassManager getManager].sections;
     //}
     
-    if (self.filteredSections != nil)
+    if (self.sections != nil)
     {
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"start_t" ascending:YES];
-        NSArray *sortedSections =[self.filteredSections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+        NSArray *sortedSections =[self.sections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
         
         PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
         cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
@@ -178,7 +157,25 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+*/
 
- */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+    NSArray *sortedSections =[self.sections sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
+    self.selectedSection = section;
+    [self performSegueWithIdentifier:@"sectionToDetail" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"sectionToDetail"]) {
+        PUCDetailViewController *destinationVc = [segue destinationViewController];
+        destinationVc.section = self.selectedSection;
+    }
+}
+
 
 @end

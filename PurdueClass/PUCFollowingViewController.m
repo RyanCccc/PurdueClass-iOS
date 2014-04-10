@@ -28,7 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -36,10 +35,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)refreshFollowList
 {
-    [super viewWillAppear:animated];
-    
     NSArray * list = [NSArray arrayWithContentsOfFile:[PUCClassManager getManager].followPath];
     if (list!=nil) {
         self.followList = list;
@@ -48,7 +45,12 @@
         self.followList = nil;
     }
     [self.tableView reloadData];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self refreshFollowList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,15 +63,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return [self.followList count];
 }
 
@@ -94,8 +92,8 @@
          [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
                                                     title:@"More"];
         [rightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:0.188f green:0.231f blue:1.0f alpha:1.0f]
-                                                    title:@"Follow"];
+         [UIColor colorWithRed:1.0f green:0.231f blue:0.2f alpha:1.0f]
+                                                    title:@"Delete"];
         cell = [[PUCSectionCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                      reuseIdentifier:CellIdentifier
                                  containingTableView:self.tableView // For row height and selection
@@ -116,10 +114,7 @@
     {
         NSDictionary* section =  self.followList[indexPath.row];
         cell.rightLabel.text = [section objectForKey:@"crn"];
-        
-        NSInteger start_t = [[section objectForKey:@"start_t"]integerValue];
-        NSInteger end_t = [[section objectForKey:@"end_t"]integerValue];
-        cell.leftLabel.text = [NSString stringWithFormat:@"%d:%d%@ ~ %d:%d%@", start_t/60, start_t%60, start_t%60==0?@"0":@"", end_t/60, end_t%60, end_t%60==0?@"0":@""];
+        cell.leftLabel.text = [section objectForKey:@"time"];
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", [section objectForKey:@"number"]];
         //cell.downRightLabel.text = [section.linked_sections count]==0?@"No required sections":[NSString stringWithFormat:@"* %d required section", [section.linked_sections count]];
         
@@ -177,5 +172,51 @@
 }
 
  */
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+            NSLog(@"Seats button was pressed");
+            break;
+        case 1:
+            NSLog(@"Requires button was pressed");
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    PUCClassManager * mng = [PUCClassManager getManager];
+    switch (index) {
+        case 0:
+            NSLog(@"More button was pressed");
+            break;
+        case 1:
+        {
+            BOOL success = [mng deleteFollowing: ((PUCSectionCell*) cell).rightLabel.text];
+            if (success){
+                [self refreshFollowList];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                                message:@"Delete Successfully!"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                                message:@"Delete failed!"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+
+            break;
+        }
+        default:
+            break;
+    }
+}
 
 @end

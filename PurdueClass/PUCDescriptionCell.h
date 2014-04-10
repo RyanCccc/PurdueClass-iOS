@@ -10,10 +10,12 @@
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
-#define CELL_CONTENT_MARGIN 10.0f
+#define CELL_CONTENT_MARGIN 15.0f
+#define CELL_TITLE_HEIGHT 15.0f
 
 @interface PUCDescriptionCell : UITableViewCell
 
+@property (nonatomic, strong) UILabel* titleLabel;
 @property (nonatomic, strong) UILabel* label;
 @property (nonatomic)BOOL added;
 - (void)addText: (NSString *)text;

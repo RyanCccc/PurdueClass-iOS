@@ -20,7 +20,8 @@
     {
         PUCSection * section = [[PUCSection alloc]init];
         section.crn = [section_raw objectForKey:@"crn"];
-        section.number = [section_raw objectForKey:@"crn"];
+        section.number = [section_raw objectForKey:@"number"];
+        section.name = [section_raw objectForKey:@"name"];
         NSString * linked_id = [section_raw objectForKey:@"linked_id"];
         if (linked_id != nil)
         {
@@ -34,6 +35,26 @@
         [sections addObject:section];
     }
     return sections;
+}
+
+- (NSArray *)linkedSections
+{
+    if (self.linked_id != nil && _linkedSections==nil) {
+        _linkedSections = [self getLinkedSections];
+    }
+    return _linkedSections;
+}
+
+- (NSArray *)getLinkedSections
+{
+    NSMutableArray * linkedSections = [[NSMutableArray alloc]init];
+    NSArray * allSections = self.course.sections;
+    for (PUCSection* sec in allSections) {
+        if ([sec.linked_id isEqualToString: self.required_linked_id]) {
+            [linkedSections addObject:sec];
+        }
+    }
+    return linkedSections;
 }
 
 @end

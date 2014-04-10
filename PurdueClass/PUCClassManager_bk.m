@@ -28,7 +28,7 @@ static PUCClassManager* me;
     return me;
 }
 
-- (void) getDataFor:(NSString *)term action:(void(^)())handler
+- (void) getDataFor:(NSString *)term
 {
     
     [self clearCourse];
@@ -38,21 +38,18 @@ static PUCClassManager* me;
         NSString *urlStr = [NSString stringWithFormat:@"http://purdue-class.chenrendong.com/course/json/catalogs/%@/", term];
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            self.catalogs = (NSDictionary *)responseObject;
+            NSLog(@"%@", responseObject);
+            NSLog(@"test");
+            //self.catalogs = (NSDictionary *)responseObject;
             [self writeCatalogs:responseObject forTerm:term];
-            [self getCoursesFor:term action:handler];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
         }];
     }else
     {
         self.catalogs = catalogs;
-        [self getCoursesFor:term action:handler];
     }
-}
 
-- (void) getCoursesFor:(NSString *)term action:(void(^)())handler
-{
     NSArray * courses = [self readCoursesForTerm:term];
     if (courses==nil) {
         NSString *urlStr = [NSString stringWithFormat:@"http://purdue-class.chenrendong.com/course/json/all/%@/", term];
@@ -61,13 +58,11 @@ static PUCClassManager* me;
             NSArray * data = (NSArray *)responseObject;
             self.subjects = [PUCSubject initWithMultiSubjects:data];
             [self writeCourses:responseObject forTerm:term];
-            handler();
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
         }];
     }else{
         self.subjects = [PUCSubject initWithMultiSubjects:courses];
-        handler();
     }
 }
 

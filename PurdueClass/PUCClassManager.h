@@ -14,6 +14,7 @@
 
 @interface PUCClassManager : NSObject
 
+@property (strong, nonatomic)NSDictionary* catalogs;
 @property (strong, nonatomic)NSMutableArray * sections;
 @property (strong, nonatomic)NSMutableArray * meetings;
 @property (strong, nonatomic)NSMutableArray * courses;
@@ -21,9 +22,10 @@
 @property (strong, nonatomic)NSString *followPath;
 
 + (PUCClassManager *)getManager;
-- (void) getDataFor:(NSString *)term;
+- (void) getDataFor:(NSString *)term action:(void(^)())handler;
 - (void) clearCourse;
 - (BOOL)writeFollowing:(id)data;
+- (BOOL)deleteFollowing:(NSString*)crn;
 - (BOOL)writeCourses:(NSString* )data forTerm:(NSString *)term;
 - (NSArray*)readCoursesforTerm:(NSString *)term;
 - (NSInteger) getRequiredSectionsBy:(PUCSection*) section;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PUCClassManager.h"
 
 @interface PUCLinkedSectionViewController : UITableViewController
 

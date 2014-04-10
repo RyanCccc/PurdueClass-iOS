@@ -21,7 +21,15 @@
         NSDictionary * course_raw = [courses_raw objectForKey:key];
         course.name = [course_raw objectForKey:@"name"];
         course.CNBR = key;
-        course.description = @"NONE";
+        
+        NSString * courseName = [NSString stringWithFormat:@"%@%@", subject.subject, course.CNBR];
+        NSDictionary * catalog = [[PUCClassManager getManager].catalogs objectForKey:courseName];
+        if (catalog!=nil) {
+            course.description = [catalog objectForKey:@"description"];
+            course.name = [catalog objectForKey:@"name"];
+        }else{
+            course.description = @"None";
+        }   
         course.subject = subject;
         course.sections = [PUCSection initWithMultiSections:[course_raw objectForKey:@"sections"] by:course];
         [[[PUCClassManager getManager]courses] addObject:course];

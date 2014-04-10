@@ -87,6 +87,7 @@
         }
         self.filteredSections = [NSArray arrayWithArray:tmp_sections];
     }
+    self.title = [NSString stringWithFormat:@"%@%@-%@", self.course.subject.subject, self.course.CNBR, segTitle];
     [self.tableView reloadData];
 }
 
@@ -106,7 +107,7 @@
     [self.segmentedControl insertSegmentWithTitle:@"All" atIndex:0 animated:NO];
     [self refresh];
     
-    self.title = [NSString stringWithFormat:@"%@%@", self.course.subject.subject, self.course.CNBR];
+    self.title = [NSString stringWithFormat:@"%@%@-All", self.course.subject.subject, self.course.CNBR];
     /*
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     spinner.center = CGPointMake(160, 200);
@@ -222,8 +223,7 @@
         cell.rightLabel.text = [NSString stringWithFormat:@"CRN: %@", section.crn];
         cell.leftLabel.text = section.time;
         cell.downLeftLabel.text = [NSString stringWithFormat:@"Section No: %@", section.number];
-        NSInteger requiredCount = [[PUCClassManager getManager]getRequiredSectionsBy:section];
-        cell.downRightLabel.text = requiredCount==0?@"No required sections":[NSString stringWithFormat:@"* %ld required section", (long)requiredCount];
+        cell.downRightLabel.text = section.linkedSections==nil?@"No linked sections":@"* Require linked section";
     }
     return cell;
 }
@@ -235,6 +235,7 @@
     
     PUCSection * section = (PUCSection *)[sortedSections objectAtIndex:indexPath.row];
     self.selectedSection = section;
+    self.title = [NSString stringWithFormat:@"%@%@", self.course.subject.subject, self.course.CNBR];
     [self performSegueWithIdentifier:@"sectionToDetail" sender:self];
     
 }

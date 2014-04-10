@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0404AF5E18F6198800DE393A /* GmailLikeLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */; };
 		0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443CAA218CBA41A004C524F /* PUCSectionViewController.m */; };
 		046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */; };
 		046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0404AF5C18F6198800DE393A /* GmailLikeLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GmailLikeLoadingView.h; sourceTree = "<group>"; };
+		0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailLikeLoadingView.m; sourceTree = "<group>"; };
 		0443CAA118CBA41A004C524F /* PUCSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSectionViewController.h; sourceTree = "<group>"; };
 		0443CAA218CBA41A004C524F /* PUCSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSectionViewController.m; sourceTree = "<group>"; };
 		046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCDetailViewController.h; sourceTree = "<group>"; };
@@ -122,6 +125,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0404AF5A18F6190200DE393A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				04D7F35618CBFCF600875CD7 /* PUCSectionCell.h */,
+				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
+				046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */,
+				046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		0404AF5B18F6191500DE393A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				04848EAF18CD8CA1004081D4 /* PUCFollowingViewController.h */,
+				04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */,
+				04848EAC18CD7FDC004081D4 /* PUCLinkedSectionViewController.h */,
+				04848EAD18CD7FDC004081D4 /* PUCLinkedSectionViewController.m */,
+				046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */,
+				046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */,
+				0443CAA118CBA41A004C524F /* PUCSectionViewController.h */,
+				0443CAA218CBA41A004C524F /* PUCSectionViewController.m */,
+				04BBE5F318CAF258006B8E49 /* PUCCourseViewController.h */,
+				04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */,
+				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
+				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
 		049BAFD118C972B300A3F361 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +168,8 @@
 				049BAFDF18C976F800A3F361 /* PUCMeeting.m */,
 				04BBE5F018CAD1B5006B8E49 /* PUCClassManager.h */,
 				04BBE5F118CAD1B5006B8E49 /* PUCClassManager.m */,
+				0404AF5C18F6198800DE393A /* GmailLikeLoadingView.h */,
+				0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -174,28 +209,14 @@
 		04FFC07E18C8EF7E00049790 /* PurdueClass */ = {
 			isa = PBXGroup;
 			children = (
+				0404AF5B18F6191500DE393A /* controller */,
+				0404AF5A18F6190200DE393A /* view */,
 				049BAFD118C972B300A3F361 /* model */,
 				04FFC08718C8EF7E00049790 /* PUCAppDelegate.h */,
 				04FFC08818C8EF7E00049790 /* PUCAppDelegate.m */,
 				04FFC08A18C8EF7E00049790 /* Main.storyboard */,
-				04848EAF18CD8CA1004081D4 /* PUCFollowingViewController.h */,
-				04848EB018CD8CA1004081D4 /* PUCFollowingViewController.m */,
-				04848EAC18CD7FDC004081D4 /* PUCLinkedSectionViewController.h */,
-				04848EAD18CD7FDC004081D4 /* PUCLinkedSectionViewController.m */,
-				046E0E8618CC176E00EA53D2 /* PUCDetailViewController.h */,
-				046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */,
-				0443CAA118CBA41A004C524F /* PUCSectionViewController.h */,
-				0443CAA218CBA41A004C524F /* PUCSectionViewController.m */,
-				04BBE5F318CAF258006B8E49 /* PUCCourseViewController.h */,
-				04BBE5F418CAF258006B8E49 /* PUCCourseViewController.m */,
-				049BAFCE18C972A000A3F361 /* PUCSubjectViewController.h */,
-				049BAFCF18C972A000A3F361 /* PUCSubjectViewController.m */,
-				04D7F35618CBFCF600875CD7 /* PUCSectionCell.h */,
-				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
 				04D7F35918CBFF4500875CD7 /* PUCTestTableViewController.h */,
 				04D7F35A18CBFF4500875CD7 /* PUCTestTableViewController.m */,
-				046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */,
-				046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */,
 				04FFC09018C8EF7E00049790 /* Images.xcassets */,
 				04FFC07F18C8EF7E00049790 /* Supporting Files */,
 			);
@@ -371,6 +392,7 @@
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
 				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
 				04FFC08518C8EF7E00049790 /* main.m in Sources */,
+				0404AF5E18F6198800DE393A /* GmailLikeLoadingView.m in Sources */,
 				046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */,
 				049BAFDD18C9761F00A3F361 /* PUCSection.m in Sources */,
 				049BAFD418C973C900A3F361 /* PUCCourse.m in Sources */,

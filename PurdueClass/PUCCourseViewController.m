@@ -186,10 +186,9 @@
                 for (PUCCourse* course in subject.courses) {
                     if ([course.CNBR isEqualToString:self.selectedCNBR]) {
                         destinationVc.course = course;
-                        break;
+                        return;
                     }
                 }
-                break;
             }
         }
     }

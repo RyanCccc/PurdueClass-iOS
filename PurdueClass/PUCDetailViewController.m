@@ -49,7 +49,23 @@
 {
     NSLog(@"Click index: %ld",(long)buttonIndex);
     if (buttonIndex == 0) {
-        [[PUCClassManager getManager]writeFollowing:self.section];
+        BOOL success = [[PUCClassManager getManager]writeFollowing:self.section];
+        if (success) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                            message:@"Added to follow list!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
+                                                            message:@"Failed to add to follow list!"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
 }
 
@@ -90,31 +106,25 @@
 {
 //#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 3;
+    return 2 + [self.section.meetings count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     NSInteger rows = 0;
     switch (section) {
         case 0:
-            rows = 3;
+            rows = 2;
             break;
             
         case 1:
-            rows = 4;
-            NSInteger requiredCount = [[PUCClassManager getManager]getRequiredSectionsBy:self.section];
-            if (requiredCount==0) {
+            rows = 5;
+            if (self.section.linkedSections==nil) {
                 rows--;
             }
             break;
-            
-        case 2:
-            rows = 5;
-            break;
         default:
+            rows = 5;
             break;
     }
     return rows;
@@ -124,33 +134,31 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nil];
+    PUCDescriptionCell *descCell = nil;
     
     // Configure the cell...
     if (cell == nil){
-        if (indexPath.section == 0 && indexPath.row == 2) {
-            cell =[[PUCDescriptionCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }else if (indexPath.section == 1 && indexPath.row == 3)
-        {
+        
+        if (indexPath.section == 1 && indexPath.row == 4){
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }else{
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell =[[PUCDescriptionCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            descCell = (PUCDescriptionCell*)cell;
         }
     }
+    
     switch (indexPath.section) {
         case 0:
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = self.section.course.name;
+                    descCell.titleLabel.text = @"Course Name:";
+                    [descCell addText:self.section.course.name];
                     break;
                 case 1:
-                    cell.textLabel.text = @"Credit:";
-                    cell.detailTextLabel.text = @"1";
-                    break;
-                case 2:
                 {
-                    NSString *desc = [NSString stringWithFormat:@"Description: %@", self.section.course.description];
-                    [((PUCDescriptionCell *)cell) addText:desc];
+                    descCell.titleLabel.text = @"Description:";
+                    [descCell addText:self.section.course.description];
                     break;
                 }
             }
@@ -158,50 +166,55 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"CRN:";
-                    cell.detailTextLabel.text = self.section.crn;
+                    descCell.titleLabel.text = @"CRN:";
+                    [descCell addText:self.section.crn];
                     break;
                 case 1:
-                    cell.textLabel.text = @"Section Type:";
-                    cell.detailTextLabel.text = self.section.type;
+                    descCell.titleLabel.text = @"Section Name:";
+                    [descCell addText:self.section.name];
                     break;
                 case 2:
-                    cell.textLabel.text = @"Section Number:";
-                    cell.detailTextLabel.text = self.section.number;
+                    descCell.titleLabel.text = @"Section Type:";
+                    [descCell addText:self.section.type];
                     break;
                 case 3:
+                    descCell.titleLabel.text = @"Section Number:";
+                    [descCell addText:self.section.number];
+                    break;
+                case 4:
                     cell.textLabel.text = @"Linked Sections";
                     //cell.detailTextLabel.text = @"Click to see";
                     break;
             }
             break;
-        case 2:
+        //Deal with meetings
+        default:
             switch (indexPath.row) {
-                case 0:{
-                    cell.textLabel.text = @"Day Of Week:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).days;
-                    break;}
+                case 0:
+                    descCell.titleLabel.text = @"Day Of Week:";
+                    [descCell addText:((PUCMeeting*)self.section.meetings[indexPath.section-2]).days];
+                    break;
                 case 1:
-                    cell.textLabel.text = @"Instructor:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).instructor;
+                    descCell.titleLabel.text = @"Instructor:";
+                    [descCell addText:((PUCMeeting*)self.section.meetings[indexPath.section-2]).instructor];
                     break;
                 case 2:
-                    cell.textLabel.text = @"Building:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).location;
+                    descCell.titleLabel.text = @"Location:";
+                    [descCell addText:((PUCMeeting*)self.section.meetings[indexPath.section-2]).location];
                     break;
                 case 3:
-                    cell.textLabel.text = @"Room:";
-                    cell.detailTextLabel.text = ((PUCMeeting*)self.section.meetings[0]).location;
+                    descCell.titleLabel.text = @"Time:";
+                    [descCell addText:((PUCMeeting*)self.section.meetings[indexPath.section-2]).time];
                     break;
                 case 4:
-                    cell.textLabel.text = @"Time:";
-                    cell.detailTextLabel.text = self.section.time;
+                    descCell.titleLabel.text = @"Date:";
+                    [descCell addText:((PUCMeeting*)self.section.meetings[indexPath.section-2]).date];
                     break;
             }
             break;
     }
     
-    return cell;
+    return descCell==nil?cell:descCell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -211,15 +224,16 @@
         case 0:
             title = @"Course";
             break;
-            
         case 1:
             title = @"Section";
             break;
-            
-        case 2:
-            title = @"Schedule";
-            break;
+        //Deal with meetings
         default:
+            if ([self.section.meetings count]==1) {
+                title = @"Schedule";
+            }else{
+                title = [NSString stringWithFormat:@"Schedule %d", section-1];
+            }
             break;
     }
     return title;
@@ -227,13 +241,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 2){
-        CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 6), 20000.0f);
-        CGSize size = [[NSString stringWithFormat:@"Description: %@", self.section.course.description] sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
-        return  MAX(size.height, 44.0f);
+    if (indexPath.section == 1 && indexPath.row == 4){
+        return 44.0f;
     }else
     {
-        return 44.0f;
+        PUCDescriptionCell * cell = (PUCDescriptionCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.getCorrectHeight;
     }
 }
 
@@ -286,7 +299,7 @@
     if ([[segue identifier] isEqualToString:@"sectionToLink"]){
         PUCLinkedSectionViewController * destinationVC = [segue destinationViewController];
         // Pass the selected object to the new view controller.
-        destinationVC.sections = nil;
+        destinationVC.sections = self.section.linkedSections;
     }
 }
 
@@ -294,7 +307,7 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1 && indexPath.row == 3)
+    if (indexPath.section == 1 && indexPath.row == 4)
     {
         [self performSegueWithIdentifier:@"sectionToLink" sender:self];
     }
