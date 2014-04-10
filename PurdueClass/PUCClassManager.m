@@ -281,18 +281,22 @@ static PUCClassManager* me;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSArray *files = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:nil];
-    
-    while (files.count > 0) {
+    NSInteger followListCount = 0;
+    while ((files.count-followListCount) > 0) {
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSArray *directoryContents = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error];
         if (error == nil) {
             for (NSString *path in directoryContents) {
-                NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:path];
-                BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
-                files = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:nil];
-                if (!removeSuccess) {
-                    // Error
-                    return NO;
+                if ([path rangeOfString:@"followList"].location == NSNotFound) {
+                    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:path];
+                    BOOL removeSuccess = [fileMgr removeItemAtPath:fullPath error:&error];
+                    files = [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:nil];
+                    if (!removeSuccess) {
+                        // Error
+                        return NO;
+                    }
+                }else{
+                    followListCount++;
                 }
             }
         } else {
@@ -319,7 +323,7 @@ static PUCClassManager* me;
                  NSNumber *max = [result objectForKey:@"max"];
                  NSNumber *remain = [result objectForKey:@"remain"];
                  NSNumber *taken = [result objectForKey:@"taken"];
-                 NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nActual: %@",max, remain, taken];
+                 NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nTaken: %@",max, remain, taken];
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Seats"
                                                                  message:msg
                                                                 delegate:nil

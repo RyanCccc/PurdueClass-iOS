@@ -184,7 +184,7 @@
                  NSNumber *max = [result objectForKey:@"max"];
                  NSNumber *remain = [result objectForKey:@"remain"];
                  NSNumber *taken = [result objectForKey:@"taken"];
-                 NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nActual: %@",max, remain, taken];
+                 NSString *msg = [NSString stringWithFormat:@"Capacity: %@\nRemaining: %@\nTaken: %@",max, remain, taken];
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Seats"
                                                                  message:msg
                                                                 delegate:nil
@@ -237,6 +237,10 @@
         PUCDetailViewController *destinationVc = [segue destinationViewController];
         destinationVc.section = self.selectedSection;
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [PUCClassManager getManager].term;
 }
 
 @end

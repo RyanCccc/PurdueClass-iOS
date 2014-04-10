@@ -18,6 +18,10 @@
 
 @implementation PUCTermViewController
 
+- (IBAction)cancelModalView:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

@@ -14,6 +14,7 @@
 
 @interface PUCSubjectViewController ()
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *switchTermBtn;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *courseTable;
 @property (strong, nonatomic) NSArray* subjects;
@@ -65,9 +66,15 @@
     [super viewDidAppear:animated];
     if (![[PUCClassManager getManager] isDataLoaded]) {
         [[PUCClassManager getManager]showLoadingViewOn:self.tableView withText:@"It may take a while for the first time. Please be patient."];
+        [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:NO];
+        [self.switchTermBtn setEnabled:NO];
+        [self.searchBar setHidden:YES];
         [[PUCClassManager getManager]getDataByAction:^()
          {
              [[PUCClassManager getManager] stopAnimationOnView:self.tableView];
+             [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:YES];
+             [self.switchTermBtn setEnabled:YES];
+             [self.searchBar setHidden:NO];
              // TODO
              NSArray* subjects_tmp = [self convertSubjectList:[[PUCClassManager getManager]subjects]];
              self.subjects = subjects_tmp;
