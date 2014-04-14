@@ -21,12 +21,31 @@
 @property (strong, nonatomic) NSMutableArray* filteredSubjects;
 @property (strong, nonatomic) NSArray* titles;
 @property (strong, nonatomic) NSString* selectedSubject;
+@property (strong, nonatomic) EMHint* hint;
+@property (nonatomic)BOOL hintDidApear;
+
 @end
 
 @implementation PUCSubjectViewController
 
 - (IBAction)showModalView:(id)sender {
     [self performSegueWithIdentifier:@"subjectToTerm" sender:self];
+}
+
+-(UIView*)hintStateViewForDialog:(id)hintState
+{
+    UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 250, 100)];
+    UILabel *l1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 60, 200, 50)];
+    [l1 setBackgroundColor:[UIColor clearColor]];
+    [l1 setTextColor:[UIColor whiteColor]];
+    [l1 setText:@"Search here ->"];
+    UILabel *l2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 15, 200, 50)];
+    [l2 setBackgroundColor:[UIColor clearColor]];
+    [l2 setTextColor:[UIColor whiteColor]];
+    [l2 setText:@"Change semester ->"];
+    [baseView addSubview:l1];
+    [baseView addSubview:l2];
+    return baseView;
 }
 
 - (NSArray *)titles
@@ -65,7 +84,7 @@
 {
     [super viewDidAppear:animated];
     if (![[PUCClassManager getManager] isDataLoaded]) {
-        [[PUCClassManager getManager]showLoadingViewOn:self.tableView withText:@"It may take a while for the first time. Please be patient."];
+        [[PUCClassManager getManager]showLoadingViewOn:self.tableView withText:@"It may take up to one minute to load data for the first time. Please be patient."];
         [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:NO];
         [self.switchTermBtn setEnabled:NO];
         [self.searchBar setHidden:YES];
@@ -80,6 +99,43 @@
              self.subjects = subjects_tmp;
              self.filteredSubjects = [[NSMutableArray alloc]initWithArray:self.subjects];
              [[self courseTable]reloadData];
+             if ([PUCClassManager getManager].setting.subjectHintShown==NO) {
+                 [self.hint presentModalMessage:@"" where:self.tabBarController.view];
+                 [PUCClassManager getManager].setting.subjectHintShown = YES;
+                 [[PUCClassManager getManager].setting writeSetting];
+             }
+         } failed:^(){
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                             message:@"Failed to load the data!\n(Check your networking and try again)"
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Retry"
+                                                   otherButtonTitles:nil];
+             [alert show];
+         }];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        [[PUCClassManager getManager]getDataByAction:^()
+         {
+             [[PUCClassManager getManager] stopAnimationOnView:self.tableView];
+             [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:YES];
+             [self.switchTermBtn setEnabled:YES];
+             [self.searchBar setHidden:NO];
+             // TODO
+             NSArray* subjects_tmp = [self convertSubjectList:[[PUCClassManager getManager]subjects]];
+             self.subjects = subjects_tmp;
+             self.filteredSubjects = [[NSMutableArray alloc]initWithArray:self.subjects];
+             [[self courseTable]reloadData];
+         } failed:^(){
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                             message:@"Failed to load the data!\n(Check your networking and try again)"
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Retry"
+                                                   otherButtonTitles:nil];
+             [alert show];
          }];
     }
 }
@@ -88,7 +144,7 @@
 {
     [super viewWillAppear:animated];
     if (![[PUCClassManager getManager] isDataLoaded]) {
-        [self.filteredSubjects removeAllObjects];
+        self.filteredSubjects = [[NSMutableArray alloc]init];
         [self.courseTable reloadData];
         [self.navigationItem setTitle:[NSString stringWithFormat: @"%@",[PUCClassManager getManager].term]];
     }
@@ -97,6 +153,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //INIT
+    self.hint = [[EMHint alloc]init];
+    [self.hint setHintDelegate:self];
+    self.hintDidApear = NO;
+    
+    
+    
     //[[PUCClassManager getManager]showLoadingViewOn:self.tableView withText:@"It may take a while for the first time. Please be patient."];
     
     // Uncomment the following line to preserve selection between presentations.

@@ -191,7 +191,7 @@
                                                        cancelButtonTitle:@"OK"
                                                        otherButtonTitles:nil];
                  [alert show];
-             }];
+             }onView:self.tableView];
             break;
         }
         case 1:

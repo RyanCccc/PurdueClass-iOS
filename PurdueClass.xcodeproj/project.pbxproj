@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0404AF5E18F6198800DE393A /* GmailLikeLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */; };
 		0404AF6118F61D8400DE393A /* PUCLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404AF6018F61D8400DE393A /* PUCLoadingView.m */; };
+		0433740718FC45B400F3CF30 /* EMHint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433740618FC45B400F3CF30 /* EMHint.m */; };
+		0433740A18FC464B00F3CF30 /* EMHintsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433740918FC464B00F3CF30 /* EMHintsView.m */; };
+		0433740D18FC567200F3CF30 /* PUCSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0433740C18FC567200F3CF30 /* PUCSetting.m */; };
 		04360E0E18F6EDD000AA239E /* PUCTermViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04360E0D18F6EDD000AA239E /* PUCTermViewController.m */; };
 		0443CAA318CBA41A004C524F /* PUCSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0443CAA218CBA41A004C524F /* PUCSectionViewController.m */; };
 		046E0E8818CC176E00EA53D2 /* PUCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E0E8718CC176E00EA53D2 /* PUCDetailViewController.m */; };
@@ -55,6 +58,12 @@
 		0404AF5D18F6198800DE393A /* GmailLikeLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GmailLikeLoadingView.m; sourceTree = "<group>"; };
 		0404AF5F18F61D8400DE393A /* PUCLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCLoadingView.h; sourceTree = "<group>"; };
 		0404AF6018F61D8400DE393A /* PUCLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCLoadingView.m; sourceTree = "<group>"; };
+		0433740518FC45B400F3CF30 /* EMHint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHint.h; sourceTree = "<group>"; };
+		0433740618FC45B400F3CF30 /* EMHint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHint.m; sourceTree = "<group>"; };
+		0433740818FC464B00F3CF30 /* EMHintsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMHintsView.h; sourceTree = "<group>"; };
+		0433740918FC464B00F3CF30 /* EMHintsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMHintsView.m; sourceTree = "<group>"; };
+		0433740B18FC567200F3CF30 /* PUCSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSetting.h; sourceTree = "<group>"; };
+		0433740C18FC567200F3CF30 /* PUCSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCSetting.m; sourceTree = "<group>"; };
 		04360E0C18F6EDD000AA239E /* PUCTermViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCTermViewController.h; sourceTree = "<group>"; };
 		04360E0D18F6EDD000AA239E /* PUCTermViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PUCTermViewController.m; sourceTree = "<group>"; };
 		0443CAA118CBA41A004C524F /* PUCSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PUCSectionViewController.h; sourceTree = "<group>"; };
@@ -142,6 +151,8 @@
 				04D7F35718CBFCF600875CD7 /* PUCSectionCell.m */,
 				046E0E8C18CC1EA000EA53D2 /* PUCDescriptionCell.h */,
 				046E0E8D18CC1EA000EA53D2 /* PUCDescriptionCell.m */,
+				0433740818FC464B00F3CF30 /* EMHintsView.h */,
+				0433740918FC464B00F3CF30 /* EMHintsView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -170,6 +181,8 @@
 		049BAFD118C972B300A3F361 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0433740518FC45B400F3CF30 /* EMHint.h */,
+				0433740618FC45B400F3CF30 /* EMHint.m */,
 				04F849D918E64E85004278FF /* PUCSubject.h */,
 				04F849DA18E64E85004278FF /* PUCSubject.m */,
 				049BAFD218C973C900A3F361 /* PUCCourse.h */,
@@ -180,6 +193,8 @@
 				049BAFDF18C976F800A3F361 /* PUCMeeting.m */,
 				04BBE5F018CAD1B5006B8E49 /* PUCClassManager.h */,
 				04BBE5F118CAD1B5006B8E49 /* PUCClassManager.m */,
+				0433740B18FC567200F3CF30 /* PUCSetting.h */,
+				0433740C18FC567200F3CF30 /* PUCSetting.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -398,10 +413,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0433740A18FC464B00F3CF30 /* EMHintsView.m in Sources */,
 				04BBE5F218CAD1B5006B8E49 /* PUCClassManager.m in Sources */,
 				049BAFE018C976F800A3F361 /* PUCMeeting.m in Sources */,
 				04848EB118CD8CA1004081D4 /* PUCFollowingViewController.m in Sources */,
 				049BAFD018C972A000A3F361 /* PUCSubjectViewController.m in Sources */,
+				0433740718FC45B400F3CF30 /* EMHint.m in Sources */,
 				04360E0E18F6EDD000AA239E /* PUCTermViewController.m in Sources */,
 				04D7F35B18CBFF4500875CD7 /* PUCTestTableViewController.m in Sources */,
 				046E0E8E18CC1EA000EA53D2 /* PUCDescriptionCell.m in Sources */,
@@ -417,6 +434,7 @@
 				04BBE5F518CAF258006B8E49 /* PUCCourseViewController.m in Sources */,
 				04FFC08918C8EF7E00049790 /* PUCAppDelegate.m in Sources */,
 				04F849DB18E64E85004278FF /* PUCSubject.m in Sources */,
+				0433740D18FC567200F3CF30 /* PUCSetting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +568,7 @@
 				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
 				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F0FE1223-2843-44A0-9769-B438400DCC0D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -567,7 +585,7 @@
 				GCC_PREFIX_HEADER = "PurdueClass/PurdueClass-Prefix.pch";
 				INFOPLIST_FILE = "PurdueClass/PurdueClass-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "F0FE1223-2843-44A0-9769-B438400DCC0D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

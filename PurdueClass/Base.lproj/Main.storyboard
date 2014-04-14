@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Da6-x8-Fe3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Da6-x8-Fe3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -82,7 +82,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Subject" id="uwr-fY-CWa">
-                        <barButtonItem key="rightBarButtonItem" title="Switch Term" id="Irc-SU-OOT">
+                        <barButtonItem key="rightBarButtonItem" title="Term" id="Irc-SU-OOT">
                             <connections>
                                 <action selector="showModalView:" destination="7mG-yb-yaO" id="wTM-Ab-RwO"/>
                                 <segue destination="bF6-gc-RKL" kind="modal" id="Y1p-HY-2Vp"/>
@@ -321,7 +321,6 @@
         <!--Navigation Controller - Course-->
         <scene sceneID="jZU-jU-ozh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lXg-Zl-EDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController definesPresentationContext="YES" id="zoC-FS-v6c" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Course" image="73-radar" id="KlV-hd-6Qj"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyo-Jt-xZg">
@@ -331,6 +330,7 @@
                         <segue destination="7mG-yb-yaO" kind="relationship" relationship="rootViewController" id="acI-gx-QPe"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXg-Zl-EDu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-709" y="-4699"/>
         </scene>

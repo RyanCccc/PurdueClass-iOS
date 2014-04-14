@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic)NSArray * filteredSections;
 @property (strong, nonatomic)PUCSection * selectedSection;
+@property (strong, nonatomic)EMHint *hint;
+@property (nonatomic)BOOL hintDidApear;
 
 @end
 
@@ -43,6 +45,34 @@
     }];
 }
  */
+
+//- (NSArray* )hintStateRectsToHint:(id)hintState
+//{
+//    NSLog(@"%@",hintState);
+//    return @[[NSValue valueWithCGRect:CGRectMake(100, 100, 400, 400) ]];
+//}
+
+//-(NSArray*)hintStateViewsToHint:(id)hintState
+//{
+//    return [[NSArray alloc] initWithObjects:self.tableView, nil];
+//}
+
+
+-(UIView*)hintStateViewForDialog:(id)hintState
+{
+    UIView *baseView = [[UIView alloc]initWithFrame:CGRectMake(80, 85, 200, 100)];
+    UILabel *l1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+    [l1 setBackgroundColor:[UIColor clearColor]];
+    [l1 setTextColor:[UIColor whiteColor]];
+    [l1 setText:@"<<--- Swipe it! <<---"];
+    UILabel *l2 = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 200, 50)];
+    [l2 setBackgroundColor:[UIColor clearColor]];
+    [l2 setTextColor:[UIColor whiteColor]];
+    [l2 setText:@" Or click it! "];
+    [baseView addSubview:l1];
+    [baseView addSubview:l2];
+    return baseView;
+}
 
 - (void)refresh
 {
@@ -103,6 +133,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //Init hint
+    _hint = [[EMHint alloc] init];
+    [_hint setHintDelegate:self];
+    self.hintDidApear = NO;
+    
     [self.segmentedControl removeAllSegments];
     [self.segmentedControl insertSegmentWithTitle:@"All" atIndex:0 animated:NO];
     [self refresh];
@@ -121,6 +157,16 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if ([self.filteredSections count]>0 && [PUCClassManager getManager].setting.sectionHintShown==NO) {
+        [self.hint presentModalMessage:@"" where:self.tabBarController.view];
+        [PUCClassManager getManager].setting.sectionHintShown = YES;
+        [[PUCClassManager getManager].setting writeSetting];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -234,7 +280,6 @@
     self.selectedSection = section;
     self.title = [NSString stringWithFormat:@"%@%@", self.course.subject.subject, self.course.CNBR];
     [self performSegueWithIdentifier:@"sectionToDetail" sender:self];
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

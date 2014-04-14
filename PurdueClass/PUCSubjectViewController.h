@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EMHint.h"
 
-@interface PUCSubjectViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate>
+@interface PUCSubjectViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate, EMHintDelegate>
 
 @end

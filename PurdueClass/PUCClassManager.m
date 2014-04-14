@@ -28,16 +28,16 @@ static PUCClassManager* me;
         me.courses = [[NSMutableArray alloc]init];
         me.sections = [[NSMutableArray alloc]init];
         me.meetings = [[NSMutableArray alloc]init];
-        
+
         me.term = @"Fall2014";
         me.isLoaded = NO;
-
+        me.setting = [PUCSetting readSetting];
         
     }
     return me;
 }
 
-- (NSArray*)getTermsByAction:(void(^)())handler
+- (NSArray*)getTermsByAction:(void(^)())handler failed:(void(^)())failed
 {
     if (self.terms==nil) {
         NSString *urlStr = @"http://purdue-class.chenrendong.com/course/json/terms/";
@@ -47,6 +47,7 @@ static PUCClassManager* me;
             handler();
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
+            failed();
         }];
     }else
         handler();
@@ -63,7 +64,7 @@ static PUCClassManager* me;
     self.isLoaded = NO;
 }
 
-- (void) getDataByAction:(void(^)())handler
+- (void) getDataByAction:(void(^)())handler failed:(void(^)())failed
 {
     
     [self clearCourse];
@@ -78,11 +79,14 @@ static PUCClassManager* me;
             [self getCoursesFor:self.term action:handler];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
+            failed();
         }];
     }else
     {
-        self.catalogs = catalogs;
-        [self getCoursesFor:self.term action:handler];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+            self.catalogs = catalogs;
+            [self getCoursesFor:self.term action:handler];
+        });
     }
     self.isLoaded = YES;
 }
@@ -102,12 +106,16 @@ static PUCClassManager* me;
             NSLog(@"%@",error);
         }];
     }else{
-        self.subjects = [PUCSubject initWithMultiSubjects:courses];
-        handler();
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+            self.subjects = [PUCSubject initWithMultiSubjects:courses];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler();
+            });
+        });
     }
 }
 
--(void) getSeatsByCRN:(NSString* )crn forTerm:(NSString *)term action:(void(^)(id))handler
+-(void) getSeatsByCRN:(NSString* )crn forTerm:(NSString *)term action:(void(^)(id))handler onView:(UITableView *)view
 {
     NSString *urlStr = @"http://purdue-class.chenrendong.com/course/json/seats";
     NSDictionary* param = @{@"crn":crn, @"term":term};
@@ -115,7 +123,13 @@ static PUCClassManager* me;
     [manager GET:urlStr parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         handler(responseObject);
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                        message:@"Failed to connect to server!"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [self stopAnimationOnView:view];
     }];
 }
 
@@ -330,7 +344,7 @@ static PUCClassManager* me;
                                                        cancelButtonTitle:@"OK"
                                                        otherButtonTitles:nil];
                  [alert show];
-             }];
+             }onView:(UITableView*)cell.superview.superview];
             break;
         }
         case 1:

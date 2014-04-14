@@ -35,6 +35,7 @@
 @interface PUCDetailViewController ()
 
 @property (strong, nonatomic)UIActionSheet* popup;
+@property (strong, nonatomic)EMHint *hint;
 
 @end
 
@@ -59,7 +60,7 @@
         }else
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info"
-                                                            message:@"Failed to add to follow list!\n(Maybe it's alreayd exist"
+                                                            message:@"Failed to add to follow list!\n(Maybe it's alreayd exist)"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -84,7 +85,7 @@
                                                    cancelButtonTitle:@"OK"
                                                    otherButtonTitles:nil];
              [alert show];
-         }];
+         }onView:self.tableView];
     }
 }
 
@@ -100,17 +101,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = [NSString stringWithFormat:@"Section %@", self.section.number];
+    self.title = @"Section Details";
     self.popup = [[UIActionSheet alloc] initWithTitle:@"Select options"
                                              delegate:self
                                     cancelButtonTitle:@"Cancel"
                                destructiveButtonTitle:nil
                                     otherButtonTitles:@"Follow it", @"Check seats", nil];
+    self.hint = [[EMHint alloc]init];
+    [self.hint setHintDelegate:self];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if([PUCClassManager getManager].setting.linkedHintShown==NO) {
+        [self.hint presentModalMessage:@"Notice: You can view sheduls here, and options are available at the upper right corner.\n\nAlso, you can check out linked sections by simply clicking \"Linked Sections\" cell." where:self.tabBarController.view];
+        [PUCClassManager getManager].setting.linkedHintShown = YES;
+        [[PUCClassManager getManager].setting writeSetting];
+    }
 }
 
 - (void)didReceiveMemoryWarning

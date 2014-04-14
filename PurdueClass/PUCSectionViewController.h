@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PUCClassManager.h"
+#import "EMHint.h"
 
-@interface PUCSectionViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate>
+@interface PUCSectionViewController : UITableViewController<UISearchBarDelegate, UISearchDisplayDelegate, EMHintDelegate>
 
 //Get from course view
 @property (strong, nonatomic)PUCCourse * course;

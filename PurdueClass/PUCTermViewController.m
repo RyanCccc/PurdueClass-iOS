@@ -41,6 +41,31 @@
             [[PUCClassManager getManager] stopAnimationOnView:self.tableView];
             self.terms = [PUCClassManager getManager].terms;
             [self.tableView reloadData];
+        }failed:^(){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                            message:@"Failed to load the data!\n(Check your networking and try again)"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Retry"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        [[PUCClassManager getManager] getTermsByAction:^(){
+            [[PUCClassManager getManager] stopAnimationOnView:self.tableView];
+            self.terms = [PUCClassManager getManager].terms;
+            [self.tableView reloadData];
+        }failed:^(){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                            message:@"Failed to load the data!\n(Check your networking and try again)"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Retry"
+                                                  otherButtonTitles:nil];
+            [alert show];
         }];
     }
 }
@@ -144,7 +169,6 @@
         mng.term = [self.terms objectAtIndex:indexPath.row];
         [mng setToUnLoad];
     }
-
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

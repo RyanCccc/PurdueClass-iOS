@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PUCClassManager.h"
+#import "EMHint.h"
 
-@interface PUCDetailViewController : UITableViewController<UIActionSheetDelegate>
+@interface PUCDetailViewController : UITableViewController<UIActionSheetDelegate, EMHintDelegate>
 
 @property (strong, nonatomic)PUCSection * section;
 

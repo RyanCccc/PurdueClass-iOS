@@ -12,6 +12,7 @@
 #import "PUCMeeting.h"
 #import "PUCCourse.h"
 #import "PUCLoadingView.h"
+#import "PUCSetting.h"
 #import <SWTableViewCell.h>
 
 @interface PUCClassManager : NSObject<SWTableViewCellDelegate>
@@ -25,22 +26,24 @@
 @property (strong, nonatomic)NSArray *terms;
 @property (strong, nonatomic)PUCLoadingView *loadingView;
 
+@property (strong, nonatomic)PUCSetting* setting;
+
 
 + (PUCClassManager *)getManager;
-- (void) getDataByAction:(void(^)())handler;
+- (void) getDataByAction:(void(^)())handler failed:(void(^)())failed;
 - (void) clearCourse;
 - (BOOL)writeFollowing:(id)data;
 - (NSArray *)readFollowing;
 - (BOOL)deleteFollowing:(NSString*)crn;
 - (BOOL)writeCourses:(NSString* )data forTerm:(NSString *)term;
 - (NSInteger) getRequiredSectionsBy:(PUCSection*) section;
--(void) getSeatsByCRN:(NSString* )crn forTerm:(NSString *)term action:(void(^)(id))handler;
+-(void) getSeatsByCRN:(NSString* )crn forTerm:(NSString *)term action:(void(^)(id))handler onView:(UITableView*)view;
 - (void)stopAnimationOnView:(UITableView*)view;
 - (void)showLoadingViewOn:(UIView*)view withText:(NSString *)text;
 - (PUCSection *)getSectionByCRN:(NSString *)crn;
 - (BOOL)isDataLoaded;
 - (void)setToUnLoad;
 - (BOOL)clearCache;
-- (NSArray*)getTermsByAction:(void(^)())handler;
+- (NSArray*)getTermsByAction:(void(^)())handler failed:(void(^)())failed;
 
 @end
